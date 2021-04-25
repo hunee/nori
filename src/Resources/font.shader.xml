@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="euc-kr" standalone="no"?>
+
+<body>
+  <node class="header">
+    <info name="font.shader.xml" version="1.0" />
+  </node>
+
+  <node class="shader">
+    <!-- SGI GL Shader Language -->
+    <shader name="font.shader" language="GLSL">
+      <!-- pass -->
+      <pass name="font_p0">
+        <!-- render_state_block -->
+        <render_state_block>
+          <render_state name="GL_DISABLE" value="GL_DEPTH_TEST" />
+          <render_state name="GL_DISABLE" value="GL_STENCIL_TEST" />
+          <render_state name="GL_ENABLE" value="GL_BLEND" />
+
+          <render_state name="GL_DISABLE" value="GL_CULL_FACE" />
+          <!--<render_state name="GL_BLEND_DST" value="GL_ONE_MINUS_SRC_ALPHA" />-->
+          <!--<render_state name="GL_BLEND_DST" value="GL_SRC_ALPHA" />-->
+          <!--<render_state name="GL_BLEND_SRC" value="GL_ONE" />-->
+          <!--<render_state name="GL_SHADE_MODEL" value="GL_SMOOTH" />-->
+          <!--<render_state name="GL_POLYGON_MODE" value="GL_FILL" />-->
+          <!--<render_state name="GL_DEPTH_FUNC" value="GL_LEQUAL" />-->
+          <!--<render_state name="GL_ALPHA_TEST_FUNC" value="GL_LESS" />-->
+					<render_state name="GL_BLEND_FUNC" sfactor="GL_SRC_ALPHA" dfactor="GL_ONE" />
+        </render_state_block>
+        
+        <!-- fragment_shader -->
+        <shader_program name="GL_FRAGMENT_SHADER" profile="fs_1_0">
+          <![CDATA[
+							in vec4 v_Color;
+							in vec2 v_TexCoord0;
+							out vec4 fragColor;
+						
+            uniform sampler2D TEX0;
+            uniform sampler2D TEX1;
+            uniform sampler2D TEX2;
+            
+            void main()
+            {
+                float r = texture(TEX0, v_TexCoord0.st, 0.0).x;
+								fragColor = vec4(r,r,r, 1) * vec4(v_Color.xyz, 1);
+            }
+          ]]>
+		    </shader_program>
+
+        <!-- vertex_shader -->
+        <shader_program name="GL_VERTEX_SHADER" profile="vs_1_0">
+          <![CDATA[
+            layout (location = 0) in vec4 position;
+            layout (location = 1) in vec4 color;
+            layout (location = 2) in vec2 texcoord0;
+            
+							out vec4 v_Color;
+							out vec2 v_TexCoord0;
+
+            uniform mat4 projection;
+            uniform mat4 view;
+            uniform mat4 model;
+
+            void main()
+            {
+              gl_Position = vec4(position.xy, 0.0, 1.0);
+              //vec4 frag_pos = model * vec4(position.xy, 0.0, 1.0);
+              //gl_Position = projection * view * frag_pos;
+
+              v_Color = color;
+              
+              v_TexCoord0 = texcoord0;
+            }
+          ]]>
+		    </shader_program>
+        
+        <!-- variable: sampler2d -->
+        <shader_variable name="sampler2D" value="TEX0">
+          <!-- ADDRESSU, ADDRESSV: WRAP, CLAMP -->
+          <sampler_state name="GL_TEXTURE_WRAP_S" value="GL_CLAMP_TO_EDGE" />
+          <sampler_state name="GL_TEXTURE_WRAP_T" value="GL_CLAMP_TO_EDGE" />
+          <!-- 	MAGFILTER, MINFILTER, MIPFILTER: NONE, POINT, LINEAR, ANISOTROPIC -->
+          <sampler_state name="GL_TEXTURE_MAG_FILTER" value="GL_NEAREST" />
+          <sampler_state name="GL_TEXTURE_MIN_FILTER" value="GL_NEAREST" />
+        </shader_variable>
+      </pass>
+    </shader>
+  </node>
+</body>

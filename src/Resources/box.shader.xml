@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="euc-kr" standalone="no"?>
+
+<body>
+  <node class="header">
+    <info name="box.shader.xml" version="1.0" />
+  </node>
+
+  <node class="shader">
+    <!-- SGI GL Shader Language -->
+    <shader name="box.shader" language="GLSL">
+      <!-- pass -->
+      <pass name="box_p0">
+        <!-- render_state_block -->
+        <render_state_block>
+          <render_state name="GL_DISABLE" value="GL_DEPTH_TEST" />
+          <render_state name="GL_DISABLE" value="GL_STENCIL_TEST" />
+          <render_state name="GL_DISABLE" value="GL_BLEND" />
+	
+          <render_state name="GL_DISABLE" value="GL_CULL_FACE" />
+        </render_state_block>
+        
+				<blend_func sfactor="SRC_ALPHA" dfactor="ONE" />
+				<depth_test v="false"/>
+
+        <!-- fragment_shader -->
+        <shader_program name="GL_FRAGMENT_SHADER" profile="fs_1_0">
+          <![CDATA[
+						in vec4 v_Color;
+						out vec4 fragColor;						
+            
+						void main()
+            {
+							fragColor = v_Color;
+            }
+          ]]>
+		    </shader_program>
+
+        <!-- vertex_shader -->
+        <shader_program name="GL_VERTEX_SHADER" profile="vs_1_0">
+          <![CDATA[
+            layout (location = 0) in vec4 position;
+            layout (location = 1) in vec4 color;
+            
+							out vec4 v_Color;
+							out vec2 v_TexCoord0;
+
+            uniform mat4 projection;
+            uniform mat4 view;
+            uniform mat4 model;
+
+            void main()
+            {
+              gl_Position = vec4(position.xy, 0.0, 1.0);
+              //vec4 frag_pos = model * vec4(position.xy, 0.0, 1.0);
+              //gl_Position = projection * view * frag_pos;
+
+              v_Color = color;
+            }
+          ]]>
+		    </shader_program>
+
+      </pass>
+    </shader>
+  </node>
+</body>
