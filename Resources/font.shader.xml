@@ -62,9 +62,9 @@
 
             void main()
             {
-              gl_Position = vec4(position.xy, 0.0, 1.0);
-              //vec4 frag_pos = model * vec4(position.xy, 0.0, 1.0);
-              //gl_Position = projection * view * frag_pos;
+              //gl_Position = vec4(position.xy, 0.0, 1.0);
+              vec4 frag_pos = model * vec4(position.xy, 0.0, 1.0);
+              gl_Position = projection * view * frag_pos;
 
               v_Color = color;
               
@@ -73,6 +73,26 @@
           ]]>
 		    </shader_program>
         
+        <!-- variable: float4x4 -->
+        <shader_variable name="mat4" value="projection"
+                         _11="1.0" _12="0.0" _13="0.0" _14="0"
+                         _21="0.0" _22="1.0" _23="0.0" _24="0"
+                         _31="0.0" _32="0.0" _33="1.0" _34="0"
+                         _41="0.0" _42="0.0" _43="1.0" _44="0" />
+        <!-- variable: float4x4 -->
+        <shader_variable name="mat4" value="view"
+                         _11="1.0" _12="0.0" _13="0.0" _14="0"
+                         _21="0.0" _22="1.0" _23="0.0" _24="0"
+                         _31="0.0" _32="0.0" _33="1.0" _34="0"
+                         _41="0.0" _42="0.0" _43="1.0" _44="0" />
+
+        <!-- variable: float4x4 -->
+        <shader_variable name="mat4" value="model"
+                         _11="1.0" _12="0.0" _13="0.0" _14="0"
+                         _21="0.0" _22="1.0" _23="0.0" _24="0"
+                         _31="0.0" _32="0.0" _33="1.0" _34="0"
+                         _41="0.0" _42="0.0" _43="1.0" _44="0" />
+
         <!-- variable: sampler2d -->
         <shader_variable name="sampler2D" value="TEX0">
           <!-- ADDRESSU, ADDRESSV: WRAP, CLAMP -->

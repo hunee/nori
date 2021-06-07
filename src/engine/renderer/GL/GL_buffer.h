@@ -21,7 +21,8 @@ namespace GL {
 #endif
 
 template <typename T, GLint target, GLenum mode = GL_TRIANGLE_STRIP, GLenum access = GL_WRITE_ONLY>
-class GL_buffer : public GL_handle, public buffer {
+class GL_buffer
+: public GL_handle, public buffer {
 private:
 	std::unique_ptr<char[]> ptr_;
 	GLsizeiptr size_;
@@ -94,7 +95,7 @@ public:
  * @brief 
  * 
  */
-#define GL_vertex_attrib_array(index, size, type, normalized, stride, pointer) \
+#define GL_vertex_attrib_pointer(index, size, type, normalized, stride, pointer) \
 	glEnableVertexAttribArray(index); \
 	glVertexAttribPointer(index, size, type, normalized, stride, pointer);
 
@@ -115,13 +116,13 @@ public:
 	{
 		//__method__
 
-		//GL_vertex_attrib_array(ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, position));
-		//GL_vertex_attrib_array(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(T), (void*) offsetof(T, color));
-		//GL_vertex_attrib_array(ATTRIB_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, tex0));
+		//GL_vertex_attrib_pointer(ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, position));
+		//GL_vertex_attrib_pointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(T), (void*) offsetof(T, color));
+		//GL_vertex_attrib_pointer(ATTRIB_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, tex0));
 
-		GL_vertex_attrib_array(0, 4, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, position));
-		GL_vertex_attrib_array(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(T), (void*) offsetof(T, color));
-		GL_vertex_attrib_array(2, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, tex0));
+		GL_vertex_attrib_pointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, position));
+		GL_vertex_attrib_pointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(T), (void*) offsetof(T, color));
+		GL_vertex_attrib_pointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, tex0));
 	}
 };
 
@@ -141,8 +142,8 @@ public:
 	{
 		//__method__
 
-		GL_vertex_attrib_array(0, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B), (void*) offsetof(V2F_C4B, position));
-		GL_vertex_attrib_array(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(V2F_C4B), (void*) offsetof(V2F_C4B, color));
+		GL_vertex_attrib_pointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B), (void*) offsetof(V2F_C4B, position));
+		GL_vertex_attrib_pointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(V2F_C4B), (void*) offsetof(V2F_C4B, color));
 	}
 };
 
@@ -170,10 +171,8 @@ public:
  * @brief 
  * 
  */
-class GL_vertex_array : 
-	public vertex_array,
-	public GL_handle {
-
+class GL_vertex_array
+: public vertex_array, public GL_handle {
 public:
 	GL_vertex_array()
 	{

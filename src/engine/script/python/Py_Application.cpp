@@ -76,7 +76,7 @@ static PyObject * PyApplication_runLoop_ = NULL;
 static PyObject *
 PyApplication_set_runLoop(PyObject *self, PyObject *args)
 {
-    __function__
+    ///__py_function__
     
     PyObject *result = NULL;
     PyObject *temp;
@@ -111,7 +111,7 @@ PyApplication_set_runLoop(PyObject *self, PyObject *args)
 static PyObject *
 PyApplication_runLoop(PyObject *self, PyObject *args)
 {
-    __function__
+    __py_function__
     
     return PyObject_CallObject(PyApplication_runLoop_, args);
 }

@@ -123,7 +123,7 @@ Py_node_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 static int
 Py_node_init(Py_node_object *self, PyObject *args, PyObject *kwds)
 {
-//    __function__
+    __py_function__
 
 /*{
     auto node_ptr = Py_get<GL::dummy_node>(self->node_ptr);
@@ -269,10 +269,10 @@ Py_node_draw(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 static PyObject *
 Py_node_dump(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 {
-   __function__
+   __py_function__
 {
     auto node_ptr = Py_get<GL::dummy_node>(self->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
+    COUT << "- name: \"" << node_ptr->name_ << "\", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 
     node_ptr->dump();    
 }

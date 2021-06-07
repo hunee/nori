@@ -74,9 +74,12 @@ void set_font(std::shared_ptr<font>& font)
 	y = 1 - n; flip_y
 */
 
-		///__FUNC_YEL__
+		
+
 		if (is_renew_)
 		{
+			is_renew_ = false;
+			
 			int x = 0;//pos.x;
 			int y = 0;//pos.y;
 

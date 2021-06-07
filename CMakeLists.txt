@@ -700,9 +700,11 @@ endif()
 # COPY
 #
 #
-#message(${CMAKE_CURRENT_SOURCE_DIR})
+set(COPY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
+set(DESTINATION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources")
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Resources/ 
-     DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources/
+message(STATUS "\n-- COPY ${COPY_DIR} -> ${DESTINATION_DIR}")
+file(COPY ${COPY_DIR}/ 
+    DESTINATION ${DESTINATION_DIR}/
 )
 

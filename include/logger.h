@@ -130,6 +130,8 @@ inline int __printf(const char * fmt, ...)
 #define __function__ __printf(">> %s%s%s:%d%s: %s- %s%s\n", KCYN, KUNDL, __FILE__, __LINE__, RST, KBLU, __PRETTY_FUNCTION__, RST);
 #define __method__ __printf(">> %s%s(%p)%s: %s%s%s:%d%s: %s- %s%s\n", KGRN, __typeid_name(*this), this, RST, KCYN, KUNDL, __FILE__, __LINE__, RST, KBLU, __PRETTY_FUNCTION__, RST);
 
+#define __py_function__ __printf(">> %s%s%s:%d%s: %s- %s%s\n", KYEL, KUNDL, __FILE__, __LINE__, RST, KBLU, __PRETTY_FUNCTION__, RST);
+
 #define __break__ __printf(">> %s%s%s:%d%s\n", KRED, KUNDL, __FILE__, __LINE__, RST);
 
 

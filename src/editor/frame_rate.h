@@ -102,6 +102,7 @@ void _tick(double dt) override
 
     GL::point pos(5,5);
     bmfrc_->textout(pos, fps, 0xffffffff);
+		bmfrc_->is_renew_ = true;
 
     std::string text = R"(참고로, wide character 라고 하여 반드시 "wide" 할 필요는 없습니다.
 wide/mb character 에 대한 지원 의지 (혹은 필요성) 가 전혀 없는
@@ -144,8 +145,8 @@ if (ftfrc2_->is_renew_)
     GL::point pos3(50,150);
     ftfrc2_->textout(pos3, wtext2, 0xffffff00);
 
-ftfrc_->is_renew_ = false;
-ftfrc2_->is_renew_ = false;
+//ftfrc_->is_renew_ = false;
+//ftfrc2_->is_renew_ = false;
 
 
 	}

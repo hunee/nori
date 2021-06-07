@@ -151,9 +151,10 @@ else {
 
 
 		///anchor
-		auto owner = ptr()->owner();
+	//	auto owner = ptr()->owner();
+		auto o = owner();
 
-		auto fr = std::make_shared<GL::node<GL::frame_rate> >("frame_rate", owner)->add();
+		auto fr = std::make_shared<GL::node<GL::frame_rate> >("frame_rate", o)->add();
 		{
 			auto p = dynamic_pointer_cast<GL::frame_rate>(fr);
 			p->transform_.x = 0;
@@ -161,8 +162,10 @@ else {
 
 			p->_began();
 		}
+		//o->erase("frame_rate");
 
-		auto fp = std::make_shared<GL::node<GL::ui::panel> >("ui_panel", owner)->add();
+#if 1
+		auto fp = std::make_shared<GL::node<GL::ui::panel> >("ui_panel", o)->add();
 		{
 			auto p = dynamic_pointer_cast<GL::ui::frame_rect>(fp);
 			p->transform_.x = 50;
@@ -219,6 +222,7 @@ __break__
 
 			p->_began();
 		}
+		#endif
 }
 
 //began()

@@ -112,12 +112,12 @@ public:
 		return p;
 	}
 
-	template <typename T>
+	template <typename T=node_>
 	std::shared_ptr<T> owner()
 	{
 		__method__
 
-		auto p = dynamic_cast<component_*>(this);
+		auto p = dynamic_cast<T*>(this);
 		auto owner = p->owner();
 		if (owner)
 			return std::dynamic_pointer_cast<T>(owner);

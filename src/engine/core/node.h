@@ -20,15 +20,29 @@ public:
 public:
 	node_() {}
 	node_(const std::string& name) : component_(name) {}
-	node_(const std::string& name, const std::shared_ptr<component_>& owner) : component_(name, owner)	{}
+	node_(const std::string& name, const std::shared_ptr<component_>& owner) : component_(name, owner) {}
 
 public:
-	virtual ~node_() { /*__FUNC_YEL__*/ }
+	virtual ~node_() {}
+
+public:
+	virtual std::shared_ptr<node_> add()
+	{
+		auto p = std::dynamic_pointer_cast<node_>(owner());
+		auto n = std::dynamic_pointer_cast<node_>(get_shared_ptr());
+	
+		auto ret = p->insert({name_, nullptr});
+		if (ret.second == true)
+		{
+			ret.first->second = n;
+		}
+
+		return n;
+	}
 
 public:
 	template <typename T=node_>
 	void add(const std::string& name, std::shared_ptr<T> node)
-	//void add(const std::string& name, std::shared_ptr<node_> node)
 	{
 		//__method__
 
@@ -40,27 +54,16 @@ public:
 		}
 	}
 
-	template <typename T>
+	template <typename T=node_>
 	std::shared_ptr<T> get(const std::string& name)
 	{
 		auto it = find(name);
 		if (it != end())
+		{
 			return std::dynamic_pointer_cast<T>(it->second);
+		}
 
 		return nullptr;
-	}
-
-public:
-	virtual std::shared_ptr<node_> add()
-	{
-		auto p = std::dynamic_pointer_cast<node_>(owner());
-		auto n = std::dynamic_pointer_cast<node_>(get_shared_ptr());
-	
-		auto ret = p->insert({name_, nullptr});
-		if (ret.second == true)
-			ret.first->second = n;
-
-		return n;
 	}
 
 public:
@@ -80,13 +83,13 @@ public:
 public:
 	virtual void dump()
 	{
-		///__method__
+		__method__
 
-		COUT << "* name: \"" << name_ << "\", type: " << __typeid_name(*this) << ENDL;
+		COUT << "- name: \"" << name_ << "\", type: " << __typeid_name(*this) << ", use_count: " << shared_from_this().use_count() << ENDL;
 
 		auto parent = owner_.lock();
 		if (parent)
-			COUT << "- parent name: \"" << parent->name_ << "\", type: " << __typeid_name(*parent) << ", use_count: " << parent.use_count() << ENDL;
+			COUT << "+ parent name: \"" << parent->name_ << "\", type: " << __typeid_name(*parent) << ", use_count: " << parent.use_count() << ENDL;
 
 		/////
 		for (auto&& kv : *this)
@@ -184,7 +187,7 @@ public:
 //root_->insert("dummy", std::make_unique<GL::node<GL::dummy_node2> >("dummy"));
 class dummy {
 public:
-	virtual ~dummy() { /*__FUNC_YEL__*/ }
+	virtual ~dummy() {}
 
 public:
 	void _began() {}
