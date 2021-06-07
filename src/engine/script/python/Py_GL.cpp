@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -41,7 +41,7 @@ extern PyTypeObject CustomType;
 static PyObject *
 PyGL_ActiveTexture(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
     
     const char *command;
     int sts;
@@ -65,7 +65,7 @@ PyGL_ActiveTexture(PyObject *self, PyObject *args)
     sprintf(pathname, "%s/%s", theApp->dataPath(), xml_name);
 
     auto tex1 = asset_manager::get()->import<GL::shader>(pathname);
-    COUT << "1. tex1: " << (tex1 ? typeid_name(*tex1):"nullptr") << ENDL;
+    COUT << "1. tex1: " << (tex1 ? __typeid_name(*tex1):"nullptr") << ENDL;
 
 /*
         // Build the name object
@@ -116,7 +116,7 @@ PyGL_ActiveTexture(PyObject *self, PyObject *args)
 static PyObject *
 PyApplication_dataPath(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
     
     return PyUnicode_FromString(theApp->dataPath());
 }*/
@@ -131,7 +131,7 @@ PyApplication_dataPath(PyObject *self, PyObject *args)
 static PyObject *
 PyGL_ClientActiveTexture(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
     
     int command;
     int sts = 1;
@@ -195,7 +195,7 @@ static const char * PyGL_Version_ = "0.0.1";
  */
 PyMODINIT_FUNC PyInit_GL(void)
 {
-    //LOGF();
+    //__function__
         
     ///
     PyObject *m;

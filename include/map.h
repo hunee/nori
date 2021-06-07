@@ -1,8 +1,8 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
-//std::map<const std::string, std::unique_ptr<ICLASS(node)>> map_;
+//std::map<const std::string, std::unique_ptr<node_>> map_;
 template <typename V>
 class map {
 public:
@@ -14,7 +14,7 @@ protected:
 public:
 	V& operator[] (const char* name)
 	{
-		//CLOGF();
+		//__method__
 
 		return map_[name];
 	}
@@ -44,7 +44,7 @@ public:
 
 	const V& find(const char* name) const
 	{
-		//CLOGF();
+		//__method__
 
 		auto it = map_.find(name);
 		if (it == map_.end())
@@ -56,7 +56,7 @@ public:
 			throw std::runtime_error(e);
 		}
 
-		///COUT << KYEL << "typeid().name: " << (it->second ? typeid_name(*it->second) : "nullptr") << ENDL;
+		///COUT << KYEL << "typeid().name: " << (it->second ? __typeid_name(*it->second) : "nullptr") << ENDL;
 		return it->second;
 	}
 

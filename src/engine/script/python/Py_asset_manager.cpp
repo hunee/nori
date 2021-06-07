@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -39,7 +39,7 @@ static PyModuleDef Py_GLX_module = {
 static PyObject *
 Py_asset_import(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
     
     const char *command;
     int sts;
@@ -53,7 +53,7 @@ Py_asset_import(PyObject *self, PyObject *args)
     sprintf(pathname, "%s/%s", theApp->dataPath(), xml_name);
 
     auto tex1 = asset_manager::get()->import<GL::shader>(pathname);
-    COUT << "1. tex1: " << (tex1 ? typeid_name(*tex1):"nullptr") << ENDL;
+    COUT << "1. tex1: " << (tex1 ? __typeid_name(*tex1):"nullptr") << ENDL;
 
     auto pp = PyObject_New(Py_asset_object, &Py_asset_ptr_type);
     pp->asset_ptr = Py_ptr(&tex1);

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -8,29 +8,29 @@ namespace GL {
 
 
 /**
- * @brief Construct a new ICLASS object
+ * @brief Construct a new node object
  * 
  */
-class ICLASS(node) 
-: public ICLASS(component)
-, public std::map<const std::string, std::shared_ptr<ICLASS(node)>> {
+class node_ 
+: public component_
+, public std::map<const std::string, std::shared_ptr<node_>> {
 public:	
-	///std::shared_ptr<ICLASS(node)> get_shared_ptr() { return shared_from_this(); }
+	///std::shared_ptr<node_> get_shared_ptr() { return shared_from_this(); }
 
 public:
-	ICLASS(node)() {}
-	ICLASS(node)(const std::string& name) : ICLASS(component)(name) {}
-	ICLASS(node)(const std::string& name, const std::shared_ptr<ICLASS(component)>& owner) : ICLASS(component)(name, owner)	{}
+	node_() {}
+	node_(const std::string& name) : component_(name) {}
+	node_(const std::string& name, const std::shared_ptr<component_>& owner) : component_(name, owner)	{}
 
 public:
-	virtual ~ICLASS(node)() { /*YLOGF();*/ }
+	virtual ~node_() { /*__FUNC_YEL__*/ }
 
 public:
-	template <typename T=ICLASS(node)>
+	template <typename T=node_>
 	void add(const std::string& name, std::shared_ptr<T> node)
-	//void add(const std::string& name, std::shared_ptr<ICLASS(node)> node)
+	//void add(const std::string& name, std::shared_ptr<node_> node)
 	{
-		//CLOGF();
+		//__method__
 
 		auto ret = insert({name, nullptr});
 		if (ret.second == true)
@@ -51,10 +51,10 @@ public:
 	}
 
 public:
-	virtual std::shared_ptr<ICLASS(node)> add()
+	virtual std::shared_ptr<node_> add()
 	{
-		auto p = std::dynamic_pointer_cast<ICLASS(node)>(owner());
-		auto n = std::dynamic_pointer_cast<ICLASS(node)>(get_shared_ptr());
+		auto p = std::dynamic_pointer_cast<node_>(owner());
+		auto n = std::dynamic_pointer_cast<node_>(get_shared_ptr());
 	
 		auto ret = p->insert({name_, nullptr});
 		if (ret.second == true)
@@ -80,13 +80,13 @@ public:
 public:
 	virtual void dump()
 	{
-		///CLOGF();
+		///__method__
 
-		COUT << "* name: \"" << name_ << "\", type: " << typeid_name(*this) << ENDL;
+		COUT << "* name: \"" << name_ << "\", type: " << __typeid_name(*this) << ENDL;
 
 		auto parent = owner_.lock();
 		if (parent)
-			COUT << "- parent name: \"" << parent->name_ << "\", type: " << typeid_name(*parent) << ", use_count: " << parent.use_count() << ENDL;
+			COUT << "- parent name: \"" << parent->name_ << "\", type: " << __typeid_name(*parent) << ", use_count: " << parent.use_count() << ENDL;
 
 		/////
 		for (auto&& kv : *this)
@@ -100,12 +100,12 @@ public:
  * 
  */
 template <typename T>
-class node : public ICLASS(node), public T {
+class node : public node_, public T {
 
 public:
 	~node()
 	{
-//		YLOGF();
+//		__FUNC_YEL__
 
 /*	COUT << "name: " << name_ << ENDL;
 	
@@ -143,13 +143,13 @@ public:
 
 public:	
 	node() {}
-	node(const std::string& name) : ICLASS(node)(name) {}
-	node(const std::string& name, const std::shared_ptr<ICLASS(component)>& owner) : ICLASS(node)(name, owner) {}
+	node(const std::string& name) : node_(name) {}
+	node(const std::string& name, const std::shared_ptr<component_>& owner) : node_(name, owner) {}
 
 public:
-	std::shared_ptr<ICLASS(node)> add() override
+	std::shared_ptr<node_> add() override
 	{
-		return ICLASS(node)::add();
+		return node_::add();
 	}
 
 public:
@@ -167,24 +167,24 @@ public:
 	{
 		T::_tick(dt);
 
-		ICLASS(node)::_tick(dt);
+		node_::_tick(dt);
 	}
 	void _draw() override
 	{
 		T::_draw();
 
-		ICLASS(node)::_draw();
+		node_::_draw();
 	}
 
 ///using ttt::operator=;
 };
 
-//std::unique_ptr<GL::ICLASS(node)> root_;
+//std::unique_ptr<GL::node_> root_;
 //root_ = std::make_unique<GL::node<GL::dummy_node> >("dummy");
 //root_->insert("dummy", std::make_unique<GL::node<GL::dummy_node2> >("dummy"));
 class dummy {
 public:
-	virtual ~dummy() { /*YLOGF();*/ }
+	virtual ~dummy() { /*__FUNC_YEL__*/ }
 
 public:
 	void _began() {}

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -13,7 +13,7 @@ namespace GL::_2d {
 #define FONT_TAB_SIZE 2
 
 class font_renderer 
-: public GL::ICLASS(renderer) {
+: public GL::base_renderer {
 public:
 	std::shared_ptr<font> font_;
 	
@@ -36,7 +36,7 @@ public:
 	///
 void set_font(std::shared_ptr<font>& font)
 {
-	//CLOGF();
+	//__method__
 
 	font_ = font;
 
@@ -74,7 +74,7 @@ void set_font(std::shared_ptr<font>& font)
 	y = 1 - n; flip_y
 */
 
-		///YLOGF();
+		///__FUNC_YEL__
 		if (is_renew_)
 		{
 			int x = 0;//pos.x;
@@ -173,7 +173,7 @@ void set_font(std::shared_ptr<font>& font)
 			vb_->unmap();
 		}
 
-		//ICLASS(renderer)::draw();
+		//base_renderer::draw();
 
 GL::float3 vpos(pos.x, pos.y, 0.0f);
 

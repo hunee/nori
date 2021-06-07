@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -9,7 +9,7 @@
 namespace GL {
 class input;
 
-class picker : public unique_ptr<picker> {
+class picker : public __unique_ptr<picker> {
 public:
 	std::vector<std::shared_ptr<GL::object>> picked_;
 

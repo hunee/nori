@@ -158,7 +158,7 @@ const char* _type<_property<int>>::name = "<property<int>>";
 
 
 template <typename T>
-class _method : public _type_info<_method<T>> {
+class _method : public __type_info<_method<T>> {
 public:
 };
 
@@ -173,7 +173,7 @@ public:
  *
  */
 template <typename T>
-class _member : public _type_info<_member<T>> {
+class _member : public __type_info<_member<T>> {
 };
 
 template <typename T, typename Target>
@@ -185,7 +185,7 @@ class type_member : public _member<T> {
  *
  */
 template <typename T>
-class _property : public _type_info<_property<T>> {
+class _property : public __type_info<_property<T>> {
 };
 
 template <typename T, typename Target>
@@ -196,7 +196,7 @@ class type_property : public _property<T> {
 /**
  *
  */
-class object : public _type_info<object> {
+class object : public __type_info<object> {
 	hash_map<const char*, _object_info*, std::hash<const char*>, eqstr> _vtable;
 
 public:
@@ -268,12 +268,12 @@ struct _lua_function {};
 
 
 template <typename T>
-struct _lua_type_info : public _type_info<T> {
+struct _lua_type_info : public __type_info<T> {
 
 };
 
 template <typename T>
-struct _lua_type : public _lua_type_info<T> {
+struct _lua_type : public _lua__type_info<T> {
 	T get(lua_State* L, void* target, const char* member)
 	{
 		return _lua_get<T>(L, target, member);
@@ -285,14 +285,14 @@ struct _lua_type : public _lua_type_info<T> {
 };
 
 template<>
-struct _lua_type<_lua_userdata> : public _type_info<_lua_userdata> {
+struct _lua_type<_lua_userdata> : public __type_info<_lua_userdata> {
 	
 };
 
 
 
 template<>
-struct _lua_type<_lua_function> : public _type_info<_lua_function> {
+struct _lua_type<_lua_function> : public __type_info<_lua_function> {
 	int _ref;
 	
 	_lua_type<_lua_function>()
@@ -376,7 +376,7 @@ struct _lua_type<_lua_function> : public _type_info<_lua_function> {
 
 
 template<>
-struct _lua_type<_lua_table> : public _type_info<_lua_table> {
+struct _lua_type<_lua_table> : public __type_info<_lua_table> {
 	hash_map<std::string, _object_info*> _field;
 	
 	void parser(lua_State* L)

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-class GLFW : public unique_ptr<GLFW>, public _type_info<GLFW> {
+class GLFW : public __unique_ptr<GLFW>, public __type_info<GLFW> {
 public:
     ~GLFW();
 

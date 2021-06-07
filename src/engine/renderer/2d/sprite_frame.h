@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -21,7 +21,7 @@ public:
 public:
 	void _tick(double dt) override
 	{
-		///CLOGF();
+		///__method__
 
 		frame_index_ += dt * fps_;
 	

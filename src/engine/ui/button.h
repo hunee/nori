@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -34,7 +34,7 @@ public:
 	std::string tex0_name_ = "blender_icons.tga";
 
 public:
-	button() {}
+	button() { __method__ }
 
 public:
 	std::shared_ptr<component<GL::ui::button_input>> bic_;	
@@ -45,16 +45,16 @@ public:
 
 public:
 
-	template <typename T= ICLASS(component)>
+	template <typename T= component_>
 	void add(const std::string& name, std::shared_ptr<T> component)
 {
 	object::add(name, component);
 }
 
 	template <>
-	void add(const std::string& name, std::shared_ptr<ICLASS(asset)> asset)
+	void add(const std::string& name, std::shared_ptr<asset_> asset)
 {
-YLOGF();
+__function__
 //member::add(name, asset);
 }
 
@@ -64,7 +64,7 @@ void _began() override
 
 ////
 	tex0_ = asset_manager::get()->import<GL::texture>(asset_path(tex0_name_));
-	auto pp = std::dynamic_pointer_cast<ICLASS(asset)>(tex0_);
+	auto pp = std::dynamic_pointer_cast<asset_>(tex0_);
 	add("tex0", pp);
 
 ///
@@ -96,11 +96,11 @@ void _began() override
 
 void on_clicked(int n)
 {
-CLOGF();
+__method__
 }
 	void _draw() override
 	{
-		///CLOGF();
+		///__method__
 
 		frame_rect::_draw();
 

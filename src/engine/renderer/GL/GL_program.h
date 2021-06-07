@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -25,7 +25,7 @@ public:
 public:
 	void link()
 {
-	//CLOGF();
+	//__method__
 	
 	handle_ = glCreateProgram();
 
@@ -159,7 +159,7 @@ COUT << v3 << ENDL;
 	//
 	void bind() override
 	{
-		//CLOGF();
+		//__method__
 
 		/**
 		 * bind shader program

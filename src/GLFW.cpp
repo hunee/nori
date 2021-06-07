@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -69,7 +69,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
  */
 GLFW::~GLFW()
 {
-    //CLOGF();
+    //__method__
 
     glfwDestroyWindow(window_);
 
@@ -84,9 +84,9 @@ GLFW::~GLFW()
  */
 int GLFW::init()
 {
-    //CLOGF();
+    //__method__
 
-///std::cout << KRED << "->> type_info: name: " << typeid_name(*this) << _type_info<unique_ptr<GLFW>>::name() << " hash_code: " << _type_info<GLFW>::hash_code() << RST << std::endl;
+///std::cout << KRED << "->> type_info: name: " << __typeid_name(*this) << __type_info<unique_ptr<GLFW>>::name() << " hash_code: " << __type_info<GLFW>::hash_code() << RST << std::endl;
 	//
 	COUT << "- GLFW version: " << 
         GLFW_VERSION_MAJOR << "." << 
@@ -160,7 +160,7 @@ void GLFW::began()
  */
 void GLFW::runLoop()
 {
-    //CLOGF();
+    //__method__
 //std::cout << KRED << "->> type_info: name: " << this->name() << " id: " << this->id() << RST << std::endl;
 
     while (!glfwWindowShouldClose(window_))

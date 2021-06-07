@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -32,7 +32,7 @@ public:
 	: size_(size)
 	, msize_(sizeof(T) * size)
 	{
-		//CLOGF();
+		//__method__
 
 		glGenBuffers(1, &handle_);
 		glBindBuffer(target, handle_);	
@@ -55,7 +55,7 @@ public:
 public:
 	void * map()
 	{
-		//CLOGF();
+		//__method__
 
 		if (target == GL_ALLOC_ARRAY_BUFFER)
 			return ptr_.get();
@@ -113,7 +113,7 @@ class GL_vertex_attrib {
 public:
 	GL_vertex_attrib()
 	{
-		//CLOGF();
+		//__method__
 
 		//GL_vertex_attrib_array(ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, sizeof(T), (void*) offsetof(T, position));
 		//GL_vertex_attrib_array(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(T), (void*) offsetof(T, color));
@@ -139,7 +139,7 @@ class GL_vertex_attrib<V2F_C4B> {
 public:
 	GL_vertex_attrib()
 	{
-		//CLOGF();
+		//__method__
 
 		GL_vertex_attrib_array(0, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B), (void*) offsetof(V2F_C4B, position));
 		GL_vertex_attrib_array(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(V2F_C4B), (void*) offsetof(V2F_C4B, color));
@@ -154,12 +154,12 @@ public:
 	: GL_buffer<T, target, mode, access>(size)
 	, GL_vertex_attrib<T>()
 	{
-		//CLOGF();
+		//__method__
 	}
 
 	void bind()
 	{
-		//CLOGF();
+		//__method__
 
 		//GL_buffer<target, access>::begin();			
 	}
@@ -177,7 +177,7 @@ class GL_vertex_array :
 public:
 	GL_vertex_array()
 	{
-		//CLOGF();
+		//__method__
 		
 		glGenVertexArrays(1, &handle_);
 

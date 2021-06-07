@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -147,9 +147,9 @@ public:
     return image_data;
 }
 
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname)
+	std::shared_ptr<asset_> import(const std::string& pathname)
 {
-  //CLOGF();
+  //__method__
 
   int width, height;
   bool has_alpha;
@@ -160,7 +160,7 @@ public:
   COUT << width << " " << height << " "  << has_alpha << ENDL;
 
 /////
-  std::shared_ptr<ICLASS(asset)> texture = nullptr;
+  std::shared_ptr<asset_> texture = nullptr;
 
   try {
     switch (nrChannels)

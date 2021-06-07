@@ -1,5 +1,5 @@
 
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -22,7 +22,7 @@ class texture_renderer : public ICLASS(renderer) {
 public:
 	texture_renderer()
 	{
-  ///YLOGF();		
+  ///__FUNC_YEL__		
 
 	//va_ = std::make_unique<GL_vertex_array>();
 	vb_ = std::make_unique<GL_buffer_<V2F_C4B_T2F, GL_ARRAY_BUFFER, GL_TRIANGLE_STRIP, GL_WRITE_ONLY>>(4);
@@ -32,7 +32,7 @@ public:
 	texture_renderer(const std::shared_ptr<texture>& tex)
 : tex0_(tex)
 {
-  ///YLOGF();
+  ///__FUNC_YEL__
 
 	rect_.width = tex->width;
 	rect_.height = tex->height;
@@ -41,7 +41,7 @@ public:
 	vb_ = std::make_unique<GL_buffer_<V2F_C4B_T2F, GL_ARRAY_BUFFER, GL_TRIANGLE_STRIP, GL_WRITE_ONLY>>(4);
   shader_ = asset_manager::get()->import<GL::shader>(asset_path("font.shader.xml"));
 }
-	virtual ~texture_renderer() { /*YLOGF();*/ };
+	virtual ~texture_renderer() { /*__FUNC_YEL__*/ };
 
 
 private:
@@ -63,39 +63,39 @@ public:
 public:
 	void ddd()
 	{
-		//CLOGF();
+		//__method__
 	}
 
 	void ddd_1(int n)
 	{
-		//CLOGF();
+		//__method__
 	}
 /*
-	const ICLASS(node) * owner()
+	const node_ * owner()
 	{
 		//component
-		auto p = dynamic_cast <ICLASS(component)*>(this);
-		COUT << "pname: " << p->name_ << " type: " << typeid_name(*p) << " owner: " << p->owner() << ENDL;
+		auto p = dynamic_cast <component_*>(this);
+		COUT << "pname: " << p->name_ << " type: " << __typeid_name(*p) << " owner: " << p->owner() << ENDL;
 
 		//node
-	//	auto o = dynamic_cast <ICLASS(node)*>(p->owner());
-//		COUT << "oname: " << o->name_ << " type: " << typeid_name(*o) << ENDL;	
+	//	auto o = dynamic_cast <node_*>(p->owner());
+//		COUT << "oname: " << o->name_ << " type: " << __typeid_name(*o) << ENDL;	
 
 		//return p->owner();		
-//return std::dynamic_pointer_cast<std::shared_ptr<ICLASS(node)>>(this);
+//return std::dynamic_pointer_cast<std::shared_ptr<node_>>(this);
 	}
 */
 	void set_texture(const std::shared_ptr<texture>& tex)
 	{
-/*		YLOGF();
+/*		__FUNC_YEL__
 
 //owner
-		auto p = dynamic_cast <ICLASS(component)*>(this);
+		auto p = dynamic_cast <component_*>(this);
 		auto owner = p->owner();
-		COUT << "pname: " << p->name_ << " type: " << typeid_name(*p) << " owner: " << p->owner() << ENDL;
+		COUT << "pname: " << p->name_ << " type: " << __typeid_name(*p) << " owner: " << p->owner() << ENDL;
 
 		
-		COUT << "oname: " << owner->name_ << " type: " << typeid_name(*owner) << ENDL;	
+		COUT << "oname: " << owner->name_ << " type: " << __typeid_name(*owner) << ENDL;	
 */
 		///owner();
 
@@ -112,13 +112,13 @@ public:
 
 		pf_ = std::make_unique<tp_method<void>>(this, &texture_renderer::ddd);
 
-		///COUT << "type: " << typeid_name(*tex0_) << ", pointer: " << tex0_ << ENDL;
+		///COUT << "type: " << __typeid_name(*tex0_) << ", pointer: " << tex0_ << ENDL;
 
 		auto pfi = pi_->get();
-		//COUT << "type: " << typeid_name(*pfi) << ", pointer: " << pfi << ENDL;
+		//COUT << "type: " << __typeid_name(*pfi) << ", pointer: " << pfi << ENDL;
 
 		auto pfii = pii_->get<std::shared_ptr<texture>>();
-		//COUT << "type: " << typeid_name(*pfii) << ", pointer: " << pfii << ENDL;
+		//COUT << "type: " << __typeid_name(*pfii) << ", pointer: " << pfii << ENDL;
 
 		(*pf_)();
 
@@ -210,7 +210,7 @@ float __y = 0;
 
 	void draw()
 	{
-//CLOGF();
+//__method__
 
 
 	auto fb = GL_framebuffer::get();

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -10,12 +10,12 @@ class bmf {
 public:
     bmf()
     {
-        //CLOGF();
+        //__method__
     }
 
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname)
+	std::shared_ptr<asset_> import(const std::string& pathname)
 	{
-		//CLOGF();
+		//__method__
 
         auto p = std::make_shared<asset<GL::_2d::bitmap_font>>();
         return p;

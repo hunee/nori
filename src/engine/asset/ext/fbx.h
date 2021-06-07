@@ -1,11 +1,11 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
 #include "renderer/3d/mesh.h"
 #include "renderer/3d/skelmesh_animation.h"
 
-#define USE_FBXSDK
+//#define USE_FBXSDK
 
 #ifdef USE_FBXSDK
 
@@ -17,10 +17,10 @@ class fbx {
 public:
 fbx()
 {
-    //CLOGF();
+    //__method__
 }
 
-std::shared_ptr<ICLASS(asset)> import(const std::string& pathname);
+std::shared_ptr<asset_> import(const std::string& pathname);
 
 };
 

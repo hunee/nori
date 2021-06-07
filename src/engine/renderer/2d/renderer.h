@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -22,7 +22,7 @@ const int	ALIGN_CENTER = 16;
 const int	ALIGN_IMAGE = 32;
 
 
-class ICLASS(renderer) {
+class base_renderer {
 protected:
 	std::unique_ptr<vertex_array> va_;
 	
@@ -30,9 +30,9 @@ protected:
 	std::shared_ptr<shader> shader_;
 	
 public:
-	ICLASS(renderer)()
+	base_renderer()
 	{
-		///YLOGF();
+		///__FUNC_YEL__
 
 	  va_ = std::make_unique<GL_vertex_array>();
 
@@ -43,7 +43,7 @@ public:
 		cc_->ortho();
 
 	}
-	virtual ~ICLASS(renderer)()
+	virtual ~base_renderer()
 	{	
 	}
 
@@ -61,7 +61,7 @@ public:
 	
 	void draw()
 	{
-		///CLOGF();
+		///__method__
 
     /**
      * bind vertex arrays object

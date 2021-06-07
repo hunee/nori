@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -24,11 +24,11 @@ public:
  * @brief 
  * 
  * @param element 
- * @return std::shared_ptr<ICLASS(asset)> 
+ * @return std::shared_ptr<asset_> 
  */
-std::shared_ptr<ICLASS(asset)> parser(const XMLElement * element)
+std::shared_ptr<asset_> parser(const XMLElement * element)
 {
-  //CLOGF();
+  //__method__
 
 	/**
 	 * technique

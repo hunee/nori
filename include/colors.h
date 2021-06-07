@@ -1,5 +1,7 @@
-#ifndef _COLORS_
-#define _COLORS_
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+
+#pragma once
+
 
 /* FOREGROUND */
 #define RST  "\x1B[0m"
@@ -164,8 +166,7 @@ std::cout   << color::rize( message, "Yellow", "Green" )
             << std::endl;
 */
 
-#include <iostream>
-#define __function__ std::cout << KYEL << ">> " << __PRETTY_FUNCTION__ << RST << std::endl;
+//#include <iostream>
+//#define __function__ std::cout << KYEL << ">> " << __PRETTY_FUNCTION__ << RST << std::endl;
 
 
-#endif	/* _COLORS_ */

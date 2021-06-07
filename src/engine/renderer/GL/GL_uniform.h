@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -117,7 +117,7 @@ public:
 public:
 	void bind() override
 	{
-		//CLOGF();
+		//__method__
 
 		glUniform2f(location_, v_.x,v_.y);
 	}

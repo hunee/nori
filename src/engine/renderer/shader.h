@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -13,26 +13,26 @@ namespace GL {
 class shader : 
 	public std::map<const std::string, std::shared_ptr<program>> {	
 public:
-	virtual ~shader() { /*CLOGF();*/ }
+	virtual ~shader() { /*__method__*/ }
 
 public:
 	void bind()
 	{
-		//CLOGF();
+		//__method__
 /*
 		for (auto&& p : *this)
 		{
-      COUT << "p: \"" << p.first << "\", type: " << typeid_name(*p.second) << ENDL;
+      COUT << "p: \"" << p.first << "\", type: " << __typeid_name(*p.second) << ENDL;
 		}*/
 	}
 
 	void dump()
 	{
-		//CLOGF();
+		//__method__
 
 		for (auto&& p : *this)
 		{
-      COUT << "program name: \"" << p.first << "\", type: " << typeid_name(*p.second) << ENDL;
+      COUT << "program name: \"" << p.first << "\", type: " << __typeid_name(*p.second) << ENDL;
 		}
 	}
 

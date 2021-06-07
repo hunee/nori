@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -29,14 +29,14 @@ public:
 	
 	void get(lua_State* L)
 	{
-		//printf("%s\n", __FUNCTION__);
+		//printf("%s\n", __function__);
 		
 		lua_userdata_impl<T>* udata = static_cast<lua_userdata_impl<T>*>(lua_touserdata(L, 1));
 		lua_push(L, ((T*)udata->_self->*_getter)());
 	}
 	void set(lua_State* L)
 	{
-		//printf("%s\n", __FUNCTION__);
+		//printf("%s\n", __function__);
 		
 		lua_userdata_impl<T>* udata = static_cast<lua_userdata_impl<T>*>(lua_touserdata(L, 1));
 		((T*)udata->_self->*_setter)(lua_to<V>(L, 3));
@@ -61,14 +61,14 @@ public:
 	
 	void get(lua_State* L)
 	{
-		//printf("%s\n", __FUNCTION__);
+		//printf("%s\n", __function__);
 		
 		lua_userdata_impl<T>* udata = static_cast<lua_userdata_impl<T>*>(lua_touserdata(L, 1));
 		lua_push(L, udata->_self->*_member);
 	}
 	void set(lua_State* L)
 	{
-		//printf("%s\n", __FUNCTION__);
+		//printf("%s\n", __function__);
 		
 		lua_userdata_impl<T>* udata = static_cast<lua_userdata_impl<T>*>(lua_touserdata(L, 1));
 		udata->_self->*_member = lua_to<V>(L, 3);

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -17,9 +17,9 @@ return std::dynamic_pointer_cast<T>());
  * @brief 
  * 
  */
-class ICLASS(asset) {
+class asset_ {
 public:
-	virtual ~ICLASS(asset)() {}
+	virtual ~asset_() {}
 };
 
 
@@ -29,7 +29,7 @@ public:
  */
 template <typename T>
 class asset 
-: public ICLASS(asset)
+: public asset_
 , public T {
 };
 
@@ -38,13 +38,13 @@ class asset
  * @brief
  * 
  */
-class ICLASS(asset_ext) {
+class asset_ext_ {
 public:
-	virtual ~ICLASS(asset_ext)() {}
+	virtual ~asset_ext_() {}
 
 public:
 	// pure virtual function providing interface framework.
-	virtual std::shared_ptr<ICLASS(asset)> import(const std::string& pathname) =0;
+	virtual std::shared_ptr<asset_> import(const std::string& pathname) =0;
 };
 
 
@@ -54,17 +54,17 @@ public:
  */
 ///class ext {
 ///public:
-///	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname);
+///	std::shared_ptr<asset_> import(const std::string& pathname);
 ///};
 
-template <typename ext>
+template <typename T>
 class asset_ext
-: public ICLASS(asset_ext)
-, public ext {
+: public asset_ext_
+, public T {
 public:
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname) override
+	std::shared_ptr<asset_> import(const std::string& pathname) override
 	{
-    return ext::import(pathname);
+    return T::import(pathname);
   }
 };
 
@@ -74,12 +74,12 @@ public:
  * 
  */
 class asset_importer
-//: public std::map<const std::string, std::unique_ptr<ICLASS(asset_ext)>>
-: public std::map<const std::string, std::shared_ptr<ICLASS(asset_ext)>>
-, public unique_ptr<asset_importer>
+//: public std::map<const std::string, std::unique_ptr<asset_ext_>>
+: public std::map<const std::string, std::shared_ptr<asset_ext_>>
+, public __unique_ptr<asset_importer>
 {
 public:
-	virtual ~asset_importer() { /*CLOGF();*/ }
+	virtual ~asset_importer() { /*__method__*/ }
 
 	/**
 	 * @brief 
@@ -87,11 +87,11 @@ public:
 	 */
 	void dump()
 	{
-		//CLOGF();
+		//__method__
 
 		for (auto&& kv : *this)
 		{
-      COUT << "ext: \"" << kv.first << "\", type: " << typeid_name(*kv.second) << ", use_count: " << kv.second.use_count() << ENDL;
+      COUT << "ext: \"" << kv.first << "\", type: " << __typeid_name(*kv.second) << ", use_count: " << kv.second.use_count() << ENDL;
 		}
 	}
 };
@@ -113,11 +113,11 @@ public:
  * 
  */
 class asset_manager	
-:	public std::map<const std::string, std::shared_ptr<ICLASS(asset)>>
-, public unique_ptr<asset_manager>
+:	public std::map<const std::string, std::weak_ptr<asset_>>
+, public __unique_ptr<asset_manager>
 {
 public:
-	virtual ~asset_manager() { /*CLOGF();*/ };
+	virtual ~asset_manager() { /*__method__*/ };
 
 private:
 	char path_[PATH_MAX];
@@ -135,7 +135,7 @@ public:
 	
 void init()
 {
-  //CLOGF();
+  //__method__
 
     ///compiler
     COUT << "- cc: " << __CC__ << " (" << __CC_MAJOR__ << "." << __CC_MINOR__ << "." << __CC_PATCHLEVEL__ << ")" << ENDL;
@@ -232,13 +232,13 @@ void init()
 */
 
 /*
-	std::shared_ptr<ICLASS(asset)>& operator[] (const std::string& name) // for non-const objects: can be used for assignment
+	std::shared_ptr<asset_>& operator[] (const std::string& name) // for non-const objects: can be used for assignment
 	{
 		//;
 
 			return find(name);
 	}
-	const std::shared_ptr<ICLASS(asset)>& operator[] (const char* name) const // for const objects: can only be used for access
+	const std::shared_ptr<asset_>& operator[] (const char* name) const // for const objects: can only be used for access
 	{
 		return _assets[name];
 	}
@@ -249,16 +249,24 @@ void init()
 	 * @brief 
 	 * 
 	 * @param pathname 
-	 * @return std::shared_ptr<ICLASS(asset)> 
+	 * @return std::shared_ptr<asset_> 
 	 */
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname)
+	std::shared_ptr<asset_> import(const std::string& pathname)
 	{
-		//CLOGF();
+		//__method__
 
 		{
 		auto it = find(pathname);
 		if (it != end())
-			return it->second;
+		{
+			if (it->second.expired())
+			{
+				///CLOG_printf("path: %s - <expired>\n", path.c_str());
+				erase(it);
+			}
+			else 
+				return it->second.lock();
+		}
 		}
 
 		/// 2.
@@ -267,8 +275,9 @@ void init()
 
 		auto pext = pathname.substr(pathname.find_last_of(".") + 1);	// "ext: png"
 		
-		std::transform(pext.begin(), pext.end(), pext.begin(),
-    [](unsigned char c){ return std::tolower(c); });
+		std::transform(pext.begin(), pext.end(), pext.begin(), 
+			[](unsigned char c) { return std::tolower(c); }
+		);
 
 		//COUT << "ext: " << pext << ENDL;
 
@@ -279,20 +288,20 @@ void init()
 			try 
 			{
 				auto second = it->second->import(pathname);
-				///COUT << KYEL << "typeid().name: " << typeid_name(*second) << ENDL;
+				///COUT << KYEL << "typeid().name: " << __typeid_name(*second) << ENDL;
 
 				//std::map<int, int>::value_type(i, i);
 				//std::make_pair(,);
 				//std::pair<int, int>(i, i)
 
 				//std::pair<std::map<char,int>::iterator,bool> ret;
-				auto ret = insert({pathname, nullptr});
-				///COUT << "std::pair<std::map<" << typeid_name(ret.first->first) << ", " << typeid_name(ret.first->second) << ">::iterator, " << typeid_name(ret.second) << ">" << ENDL;
-				///COUT << "typeid: " << typeid_name(ret.first->second) << ENDL;
+				auto ret = insert(std::pair<const std::string, std::weak_ptr<asset_>>(pathname, second));
+				///COUT << "std::pair<std::map<" << __typeid_name(ret.first->first) << ", " << __typeid_name(ret.first->second) << ">::iterator, " << __typeid_name(ret.second) << ">" << ENDL;
+				///COUT << "typeid: " << __typeid_name(ret.first->second) << ENDL;
 
 				if (ret.second == true)
 				{
-					ret.first->second = second;
+					//ret.first->second = second;
 				}
 
 				return second;
@@ -324,13 +333,17 @@ void init()
 	 */
 	void dump()
 	{
-		//CLOGF();
+		//__method__
 
 		for (auto&& kv : *this)
 		{
-      COUT << "name: \"" << kv.first << "\", type: " << (kv.second ? typeid_name(*kv.second) : "nullptr");
-			if (kv.second) std::cout << ", use_count: " << kv.second.use_count() << ENDL;
-			else std::cout << ENDL;
+      COUT << "path: \"" << kv.first << "\", type: ";
+			if (kv.second.expired())
+				std::cout << "<expired>";
+			else
+				std::cout << __typeid_name(*kv.second.lock()) << ", use_count: " << kv.second.use_count() - 1;
+
+			std::cout << ENDL;
 		}
 
 	}

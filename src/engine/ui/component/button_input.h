@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -16,6 +16,7 @@ public:
 
 button_input()
 {
+	__method__
 }
 
 int button_=0;
@@ -44,7 +45,7 @@ public:
 public:
 void _tick(double dt) override
 {
-//CLOGF();
+//__method__
 	auto in = ::input::get();
 
 	auto o = owner<object>();

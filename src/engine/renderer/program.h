@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -16,14 +16,14 @@ class program
 public:
 	program() //noexcept
 	{
-		//CLOGF();
+		//__method__
 
 		//throw std::runtime_error("Exception from 3!\n");
 	}
 
 	virtual ~program()
 	{
-		//CLOGF();		
+		//__method__		
 	}
 
 	std::map<const std::string, std::shared_ptr<state>> states_;
@@ -33,7 +33,7 @@ public:
 
 	virtual void bind()
 	{
-		//CLOGF();
+		//__method__
 
 //		for (auto&& kv : *this)
 //      kv.second->bind();
@@ -56,12 +56,14 @@ public:
 
 	void dump()
 	{
-		CLOGF();
+		#if 0
+		__method__
 
 		for (auto&& kv : *this)
 		{
-      COUT << "ext: \"" << kv.first << "\", type: " << typeid_name(*kv.second) << ", use_count: " << kv.second.use_count() << ENDL;
+      COUT << "ext: \"" << kv.first << "\", type: " << __typeid_name(*kv.second) << ", use_count: " << kv.second.use_count() << ENDL;
 		}
+		#endif
 	}
 };
 

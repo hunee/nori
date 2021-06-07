@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -27,7 +27,7 @@ public:
 	std::string tex0_name_ = "blender_icons.tga";
 
 public:
-	sprite() {}
+	sprite() { __method__ }
 
 private:
 	void moveto_to(double dt)
@@ -73,7 +73,7 @@ void _began() override
 
 	void _draw() override
 	{
-		///CLOGF();
+		///__method__
 
 		frame_rect::_draw();
 

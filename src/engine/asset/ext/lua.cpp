@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -17,9 +17,9 @@ extern "C" {
 
 namespace ext {
 
-std::shared_ptr<ICLASS(asset)> lua_shader::import(const std::string& pathname)
+std::shared_ptr<asset_> lua_shader::import(const std::string& pathname)
 {
-  //CLOGF();
+  //__method__
 
   //auto p = std::make_shared<asset_ptr<GLtexture>>(pathname);
   auto p = std::make_shared<asset<GL::shader>>();

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -12,41 +12,41 @@
  * @tparam T 
  */
 template <typename T>
-class unique_ptr {
+class __unique_ptr {
 protected:
-    unique_ptr() {}
+  __unique_ptr() {}
 
 public:
-    virtual ~unique_ptr() {}
+  virtual ~__unique_ptr() {}
 
 public:
 
-    /**
-     * @brief 
-     * 
-     * @return T* 
-     */
-    static T * get()
-    {
-        if (unique_ptr_ == nullptr)
-            unique_ptr_ = std::make_unique<T>();
+  /**
+   * @brief 
+   * 
+   * @return T* 
+   */
+  static T * get()
+  {
+    if (unique_ptr_ == nullptr)
+      unique_ptr_ = std::make_unique<T>();
 
-        return unique_ptr_.get();
-    }
+    return unique_ptr_.get();
+  }
 
-    /**
-     * @brief 
-     * 
-     */
-    static void reset()
-    {
-        if (unique_ptr_ != nullptr)
-            unique_ptr_.reset(nullptr);
-    }
+  /**
+   * @brief 
+   * 
+   */
+  static void reset()
+  {
+    if (unique_ptr_ != nullptr)
+      unique_ptr_.reset(nullptr);
+  }
 
-private:
-    // This version just uses delete to destroy the pointer.
-    static std::unique_ptr<T> unique_ptr_;
+  private:
+  // This version just uses delete to destroy the pointer.
+  static std::unique_ptr<T> unique_ptr_;
 };
 
 
@@ -56,5 +56,5 @@ private:
  * @tparam T 
  */
 template <typename T>
-std::unique_ptr<T> unique_ptr<T>::unique_ptr_ = nullptr;
+std::unique_ptr<T> __unique_ptr<T>::unique_ptr_ = nullptr;
 

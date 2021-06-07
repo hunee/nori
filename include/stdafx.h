@@ -1,8 +1,8 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 /**
  * @file stdafx.h
- * @author your name (you@domain.com)
+ * @author hunee (jhhunee@gmail.com)
  * @brief 
  * @version 0.1
  * @date 2020-12-06
@@ -12,16 +12,6 @@
  */
 
 #pragma once
-
-
-/**
- * DEBUG
- */
-#ifdef DEBUG
-    #ifndef _DEBUG
-        #define _DEBUG
-    #endif
-#endif
 
 
 /**
@@ -50,22 +40,6 @@
   #else
     #error Unsupported version of Visual Studio
   #endif
-
-#elif defined (__BORLANDC__)
-    #define __CC__                      "Borland C++ Compiler"
-    #define __CC_VER__                  __BCPLUSPLUS__
-
-    #define __CC_MAJOR__                (__BCPLUSPLUS__ / 0x100)
-    #define __CC_MINOR__                (__BCPLUSPLUS__ % 0x100)
-    #define __CC_PATCHLEVEL__           (__BCPLUSPLUS__ % 0x100)
-
-#elif defined (__INTEL_COMPILER)
-    #define __CC__                      "Intel C/C++ Compiler"
-    #define __CC_VER__                  __ICC
-
-    #define __CC_MAJOR__                (__ICC / 100)
-    #define __CC_MINOR__                ((__ICC/10) % 10)
-    #define __CC_PATCHLEVEL__           (__ICC % 10)
 
 #elif defined (__GNUC__)
     #if defined (__llvm__)
@@ -132,9 +106,10 @@
     #define DECLARE_DEPRECATED(func) func
 #endif
 
-/**void NEW_AAA(int aaa)
+/**
+void NEW_AAA(int aaa)
  {
-     std::cout << __FUNCTION__ << std::endl;
+     std::cout << __function__ << std::endl;
  }
  DECLARE_DEPRECATED(void AAA(int aaa));
  void AAA(int aaa)
@@ -168,20 +143,6 @@
 
 
 
-/**
- * Platform depended macros
- */
-
-//#ifdef __TARGRT_GL__
-//#ifdef __TARGRT_DX11__
-//#ifdef __TARGRT_DX12__
-
-//#ifdef __TARGRT_EGL__
-//#ifdef __TARGRT_METAL__
-//#ifdef __TARGRT_VULKAN__
-
-
-
 // Apple
 #if defined (__APPLE__)
     #include <Availability.h>
@@ -209,23 +170,15 @@
 
 		#define SHARED_EXPORT extern "C"
 	#endif
-
-
 #endif
+
 
 // Google Android
 #if defined (ANDROID)
 #endif
 
-// Linux
-#if defined (_LINUX)
-    #include <X11/Xlib.h>
-    #include <X11/Xutil.h>
 
-    // Headers needed for keys used in the program
-    #include <X11/extensions/xf86vmode.h>
-    #include <X11/keysym.h>
-#endif
+
 
 // Microsoft Windows
 #if defined (WIN32)
@@ -283,7 +236,7 @@
     #endif
 
     // CRT's memory leak detection
-	#if defined (_DEBUG)
+	#if defined (DEBUG)
 		#if defined (_MSC_VER)
 			#include <crtdbg.h>
 
@@ -298,6 +251,18 @@
 #endif
 
 
+// Linux
+#if defined (_LINUX)
+    #include <X11/Xlib.h>
+    #include <X11/Xutil.h>
+
+    // Headers needed for keys used in the program
+    #include <X11/extensions/xf86vmode.h>
+    #include <X11/keysym.h>
+#endif
+
+
+
 //
 #if !defined (PATH_MAX)
     #define PATH_MAX    MAX_PATH
@@ -308,6 +273,8 @@
     #define NAME_MAX    (80)
 #endif //NAME_MAX
 
+
+///
 #define UNUSED_PARAM(unusedparam)   (void)unusedparam
 
 
@@ -333,6 +300,9 @@ int main()
 #define M2W(w, m) std::mbstowcs(w, m, sizeof(w))
 
 
+#define NS_BEGAN(ns) namespace ns {
+#define NS_END(AL_ext) }
+
 
 /**
  */
@@ -350,15 +320,15 @@ int main()
 
 #include <stdexcept>
 
-///
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
 
-#include "type_info.h"
-
 ///
+#include "type_info.h"
+#include "unique_ptr.h"
+
 #include "colors.h"
 #include "logger.h"
 
-#include "renderer/math/math.h"
+#include "math/math.h"

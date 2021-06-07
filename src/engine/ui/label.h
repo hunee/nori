@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -26,6 +26,7 @@ public:
 label()
 //: color_(0xff2b2b2b)
 {
+	__method__
 }
 
 public:
@@ -52,7 +53,7 @@ public:
 	{
 		frame_rect::_draw();
 
-		///CLOGF();
+		///__method__
     GL::point pos(transform_.x2,transform_.y2);
     frc_->textout(pos, text_.c_str(), 0xffffffff);
 	}

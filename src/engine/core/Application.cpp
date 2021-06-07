@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -123,7 +123,7 @@ public:
 
 void Py_node(const char* name)
 {
-    LOGF();
+    __function__
 
     PyObject* module = PyImport_ImportModule(name);
     
@@ -148,7 +148,7 @@ void Py_node(const char* name)
  */
 int Application::run_script()
 {
-    //CLOGF();
+    //__method__
 
 #if 1
     ///Py_node("frame_rect");
@@ -367,12 +367,12 @@ int Application::init_asset_manager()
     }
 
     /////
-    auto xml = std::make_unique<asset_ext<ext::xml>>();
+    auto xml = std::make_shared<asset_ext<ext::xml>>();
     (*xml)["shader"] = std::make_unique<ext::xml_parser<ext::xml_shader_parser>>();
     //(*importer).dump();
 
-    (*importer)["xml"] = std::move(xml);
-    (*importer)["lua"] = std::make_unique<asset_ext<ext::lua_shader>>();
+    (*importer)["xml"] = xml;
+    (*importer)["lua"] = std::make_shared<asset_ext<ext::lua_shader>>();
 
 ///    importer->dump();
 
@@ -392,7 +392,7 @@ int Application::init_asset_manager()
 
 int Application::init()
 {
-///  CLOGF();
+///  __method__
 
   init_GL();
 
@@ -410,7 +410,7 @@ fi->_began();
 
   run_script();
 
-//CLOGF();
+//__method__
 asset_manager::get()->dump();
 
 //root_->dump();
@@ -426,7 +426,7 @@ asset_manager::get()->dump();
  */
 int Application::runLoop()
 {
-    //CLOGF();
+    //__method__
 
 	/**
 	 * fps

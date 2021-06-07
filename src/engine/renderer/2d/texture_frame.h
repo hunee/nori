@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -8,6 +8,7 @@ namespace GL::_2d {
 class texture_frame
 : public owner_ptr {
 public:
+	texture_frame() { __method__ }
 	virtual ~texture_frame() {}
 
 public:

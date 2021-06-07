@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -11,16 +11,17 @@ namespace GL {
  * 
  */
 class object
-: public std::map<const std::string, std::shared_ptr<ICLASS(component)>> {
+: public std::map<const std::string, std::shared_ptr<component_>> {
 public:
 //std::shared_ptr<ICLASS(object)> get_shared_ptr() { return shared_from_this(); }
 
 public:
-	transform transform_;
+	GL::transform transform_;
 	const GL::transform& transform() { return transform_; }
 
 public:
-	virtual ~object() { /*YLOGF();*/ }
+	//object() { __method__ }
+	virtual ~object() {}
 
 public:
 	virtual void _began() {}
@@ -57,17 +58,19 @@ public:
 public:	
 	void dump()
 	{
-		//CLOGF();
+		//__method__
 
 		for (auto&& kv : *this)
-      COUT << "ext: \"" << kv.first << "\", type: " << typeid_name(*kv.second) << ", use_count: " << kv.second.use_count() << ENDL;
+      COUT << "ext: \"" << kv.first << "\", type: " << __typeid_name(*kv.second) << ", use_count: " << kv.second.use_count() << ENDL;
 	}
 
 public:
-	template <typename T = ICLASS(component)>
+	template <typename T = component_>
 	void add(const std::string& name, std::shared_ptr<T> component)
-//	void add(const std::string& name, std::shared_ptr<ICLASS(component)> component)	
+//	void add(const std::string& name, std::shared_ptr<component_> component)	
 	{
+		//__method__
+
 		try {
 			component->owner_ = ptr()->get_shared_ptr();
 
@@ -91,10 +94,11 @@ public:
 	}
 
 public:
-	template <typename T = ICLASS(node)>
+	template <typename T=node_>
 	T * ptr()
 	{
-		///CLOGF();
+		//__method__
+
 		auto p = dynamic_cast <T*>(this);
   	if (p == nullptr)
   	{
@@ -111,7 +115,9 @@ public:
 	template <typename T>
 	std::shared_ptr<T> owner()
 	{
-		auto p = dynamic_cast<ICLASS(component)*>(this);
+		__method__
+
+		auto p = dynamic_cast<component_*>(this);
 		auto owner = p->owner();
 		if (owner)
 			return std::dynamic_pointer_cast<T>(owner);
@@ -137,10 +143,15 @@ public:
 	template <typename T>
 	std::shared_ptr<T> owner()
 	{
-		auto p = dynamic_cast<ICLASS(component)*>(this);
-		auto owner = p->owner();
-		if (owner) 
-			return std::dynamic_pointer_cast<T>(owner);
+		//__method__
+		
+		auto p = dynamic_cast<component_*>(this);
+		if (p)
+		{
+			auto owner = p->owner();
+			if (owner) 
+				return std::dynamic_pointer_cast<T>(owner);
+		}
 
 		return nullptr;	
 	}	

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -15,11 +15,11 @@
 //class eventhandler;
 
 class Application 
-: public unique_ptr<Application>
-, public _type_info<Application> {
+: public __unique_ptr<Application>
+, public __type_info<Application> {
 
 public:
-	std::shared_ptr<GL::ICLASS(node)> root_;
+	std::shared_ptr<GL::node_> root_;
 
 /**
  *

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -33,7 +33,7 @@ enum GLfsaa {
 #define _X(x) (x)
 #define _Y(y)	height_ - y-1)
 
-class GL_framebuffer : public unique_ptr<GL_framebuffer> {
+class GL_framebuffer : public __unique_ptr<GL_framebuffer> {
 public:
 	virtual void begin()
 	{
@@ -45,7 +45,7 @@ public:
 
 	}
 
-	virtual void set_viewport(const rect& rect)
+	virtual void set_viewport(const GL::rect& rect)
 	{
 		if (rect.width == 0 || rect.height == 0)
 			return;

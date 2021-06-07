@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -12,9 +12,9 @@
 
 namespace ext {
 
-std::shared_ptr<ICLASS(asset)> fbx::import(const std::string& pathname)
+std::shared_ptr<asset_> fbx::import(const std::string& pathname)
 {
-	//CLOGF();
+	//__method__
 
 	auto p = std::make_shared<asset<GL::_3d::mesh>>();
 	return p;

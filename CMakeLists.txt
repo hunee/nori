@@ -164,6 +164,8 @@ endif()
 set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
 
 
+#include(CheckIncludeFile)
+
 #
 # GLEW
 #
@@ -307,7 +309,7 @@ endif() #JSONCPP_DIRS
 #
 # cmake . 
 # make
-
+#[[
 set(FREETYPE2_NAME freetype-2.10.4)
 find_path(
     FREETYPE2_DIRS 
@@ -344,6 +346,52 @@ if (FREETYPE2_DIRS)
         target_link_libraries(${PROJECT_NAME} ${FREETYPE2_LIBRARIES})    
     endif() #FREETYPE2_LIBRARIES
 endif() #FREETYPE2_DIRS
+]]
+
+
+#
+# FREETYPE2
+#
+# mkdir build; cd build; 
+# cmake ../; make
+
+set(FREETYPE2_NAME freetype)
+find_path(
+    FREETYPE2_DIRS 
+    NAMES ${FREETYPE2_NAME}
+    HINTS ${DEPS_DIRS}
+    NO_DEFAULT_PATH
+)
+
+if (FREETYPE2_DIRS)
+    set(FREETYPE2_DIRS ${FREETYPE2_DIRS}/${FREETYPE2_NAME})
+    
+    set(FREETYPE2_INCLUDE_DIRS ${FREETYPE2_DIRS}/include)
+    set(FREETYPE2_LIBRARY_DIRS ${FREETYPE2_DIRS}/build)
+
+    message(STATUS "FREETYPE2_DIRS: ${FREETYPE2_DIRS}")
+
+    message(STATUS "FREETYPE2_INCLUDE_DIRS: ${FREETYPE2_INCLUDE_DIRS}")
+    message(STATUS "FREETYPE2_LIBRARY_DIRS: ${FREETYPE2_LIBRARY_DIRS}")    
+
+    find_library(
+        FREETYPE2_LIBRARIES
+        NAMES libfreetype.a
+        HINTS ${FREETYPE2_LIBRARY_DIRS}
+        REQUIRED
+        NO_DEFAULT_PATH
+    )
+
+    if(FREETYPE2_LIBRARIES)
+        message(STATUS "FREETYPE2_LIBRARIES: ${FREETYPE2_LIBRARIES}")        
+
+        include_directories(${FREETYPE2_INCLUDE_DIRS})
+
+        link_directories(${FREETYPE2_LIBRARY_DIRS})
+        target_link_libraries(${PROJECT_NAME} ${FREETYPE2_LIBRARIES})    
+
+    endif() #FREETYPE2_LIBRARIES
+endif() #FREETYPE2_DIRS
 
 
 #
@@ -352,7 +400,7 @@ endif() #FREETYPE2_DIRS
 # mkdir build; cd build; cmake ../
 # make
 # make install
-
+#[[
 set(LIBPNG_NAME libpng-1.6.37)
 find_path(
     LIBPNG_DIRS 
@@ -389,6 +437,21 @@ if (LIBPNG_DIRS)
         target_link_libraries(${PROJECT_NAME} ${LIBPNG_LIBRARIES})    
     endif() #LIBPNG_LIBRARIES
 endif() #LIBPNG_DIRS
+]]
+
+find_package(PNG REQUIRED)
+if (PNG_FOUND)
+    message(STATUS "PNG_VERSION: ${PNG_VERSION_STRING}")
+
+    message(STATUS "PNG_INCLUDE_DIRS: ${PNG_INCLUDE_DIRS}")
+    message(STATUS "PNG_LIBRARIES: ${PNG_LIBRARIES}")
+    message(STATUS "PNG_DEFINITIONS: ${PNG_DEFINITIONS}")
+
+    include_directories(${PNG_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${PNG_LIBRARIES})
+
+    add_definitions(${PNG_DEFINITIONS})
+endif ()
 
 
 #
@@ -397,7 +460,7 @@ endif() #LIBPNG_DIRS
 # mkdir build; cd build; cmake ../
 # make
 # make install
-
+#[[
 set(ZLIB_NAME zlib-1.2.11)
 find_path(
     ZLIB_DIRS 
@@ -434,6 +497,40 @@ if (ZLIB_DIRS)
         target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES})    
     endif() #ZLIB_LIBRARIES
 endif() #ZLIB_DIRS
+]]
+find_package(ZLIB REQUIRED)
+if (ZLIB_FOUND)
+    message(STATUS "ZLIB_VERSION: ${ZLIB_VERSION_STRING}")
+
+    message(STATUS "ZLIB_INCLUDE_DIRS: ${ZLIB_INCLUDE_DIRS}")
+    message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
+
+    include_directories(${ZLIB_INCLUDE_DIRS})
+
+    target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES})
+    
+endif ()
+
+
+#
+# zlib
+#
+# mkdir build; cd build; cmake ../
+# make
+# make install
+
+find_package(BZip2 REQUIRED)
+if (BZIP2_FOUND)
+    message(STATUS "BZIP2_VERSION: ${BZIP2_VERSION_STRING}")
+
+    message(STATUS "BZIP2_INCLUDE_DIR: ${BZIP2_INCLUDE_DIR}")
+    message(STATUS "BZIP2_LIBRARIES: ${BZIP2_LIBRARIES}")
+
+    include_directories(${BZIP2_INCLUDE_DIR}) # not BZIP2_INCLUDE_DIRS    
+    target_link_libraries(${PROJECT_NAME} ${BZIP2_LIBRARIES})
+
+endif ()
+
 
 
 #
@@ -484,7 +581,8 @@ endif() #FBXSDK_DIRS
 # cmake . 
 # make
 
-set(LUA_NAME lua-5.4.1)
+#set(LUA_NAME lua-5.4.1)
+set(LUA_NAME lua)
 find_path(
     LUA_DIRS 
     NAMES ${LUA_NAME}
@@ -521,6 +619,7 @@ if (LUA_DIRS)
     endif() #LUA_LIBRARIES
 endif() #LUA_DIRS
 
+
 #
 # PYTHON
 #
@@ -548,6 +647,7 @@ endif()
 #
 # ASIO STANDALONE
 #
+#[[
 find_path(Asio_INCLUDE_DIRS
     asio
 )
@@ -559,13 +659,13 @@ if(Asio_INCLUDE_DIRS)
 
     add_definitions(-DASIO_STANDALONE)
 endif()
-
+]]
 
 #
 # BOOST
 #
 #set(BOOST_ROOT /usr/local/Cellar/boost_1_73_0)
-
+#[[
 set(Boost_USE_STATIC_LIBS       ON)  # only find static libs
 set(Boost_USE_DEBUG_LIBS        OFF) # ignore debug libs and 
 set(Boost_USE_RELEASE_LIBS      ON)  # only find release libs 
@@ -593,7 +693,7 @@ if(Boost_FOUND)
     target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} pthread) 
 
 endif()
-
+]]
 
 
 #

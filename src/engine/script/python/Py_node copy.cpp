@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -11,7 +11,7 @@
 
 class python_node {
 public:
-	virtual ~python_node() { /*YLOGF();*/ }
+	virtual ~python_node() { /*__FUNC_YEL__*/ }
 
 public:    
     void began() {}
@@ -20,7 +20,7 @@ public:
     {
         return;
 
-        ///CLOGF();
+        ///__method__
 
         PyObject *pFunc, *pValue, *presult;
 
@@ -49,7 +49,7 @@ public:
 static int
 Py_node_traverse(Py_node_object *self, visitproc visit, void *arg)
 {
-    //LOGF();
+    //__function__
 
     Py_VISIT(self->node_ptr);
     Py_VISIT(self->parent);
@@ -61,7 +61,7 @@ Py_node_traverse(Py_node_object *self, visitproc visit, void *arg)
 static int
 Py_node_clear(Py_node_object *self)
 {
-    //LOGF();
+    //__function__
 
     Py_CLEAR(self->node_ptr);
     Py_CLEAR(self->parent);
@@ -72,7 +72,7 @@ Py_node_clear(Py_node_object *self)
 static void
 Py_node_dealloc(Py_node_object *self)
 {
-    //LOGF();
+    //__function__
 
     PyObject_GC_UnTrack(self);
     Py_node_clear(self);
@@ -88,7 +88,7 @@ Py_node_dealloc(Py_node_object *self)
 static PyObject *
 Py_node_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
-    //LOGF();
+    //__function__
 
     Py_node_object *self;
     self = (Py_node_object *) type->tp_alloc(type, 0);
@@ -117,11 +117,11 @@ Py_node_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 static int
 Py_node_init(Py_node_object *self, PyObject *args, PyObject *kwds)
 {
-    LOGF();
+    __function__
 
 {
     auto node_ptr = Py_get<GL::dummy_node>(self->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
+    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 }
 
     static const char *kwlist[] = {"name", "parent", NULL};
@@ -177,10 +177,10 @@ static PyMemberDef Py_node_members[] = {
 static PyObject *
 Py_node_getparent(Py_node_object *self, void *closure)
 {
-    LOGF();
+    __function__
 {
     auto node_ptr = Py_get<GL::dummy_node>(self->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
+    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 }
 
     auto parent = PyWeakref_GetObject(self->parent);
@@ -200,7 +200,7 @@ Py_node_getparent(Py_node_object *self, void *closure)
 static int
 Py_node_setparent(Py_node_object *self, PyObject *value, void *closure)
 {
-    LOGF();
+    __function__
 
     if (value == NULL) {
         PyErr_SetString(PyExc_TypeError, "Cannot delete the first attribute");
@@ -222,7 +222,7 @@ Py_node_setparent(Py_node_object *self, PyObject *value, void *closure)
 static PyObject *
 Py_node_getname(Py_node_object *self, void *closure)
 {
-    LOGF();
+    __function__
 
     Py_INCREF(self->name);
     return self->name;
@@ -231,7 +231,7 @@ Py_node_getname(Py_node_object *self, void *closure)
 static int
 Py_node_setname(Py_node_object *self, PyObject *value, void *closure)
 {
-    LOGF();
+    __function__
 
     if (value == NULL) {
         PyErr_SetString(PyExc_TypeError, "Cannot delete the first attribute");
@@ -259,12 +259,12 @@ static PyGetSetDef Py_node_getsetters[] = {
 static PyObject *
 Py_node_draw(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 {
-    LOGF();
+    __function__
     //COUT << "- Py_REFCNT: " << Py_REFCNT(self) << ENDL;
 
 {
     auto node_ptr = Py_get<GL::dummy_node>(self->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << " type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ENDL;
+    COUT << "- name: " << node_ptr->name_ << " type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ENDL;
 }
 
     if (self->parent) 
@@ -284,10 +284,10 @@ Py_node_draw(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 static PyObject *
 Py_node_dump(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 {
-    LOGF();
+    __function__
 {
     auto node_ptr = Py_get<GL::dummy_node>(self->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
+    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 
     node_ptr->dump();    
 }
@@ -297,19 +297,19 @@ Py_node_dump(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 
 void Py_node_add_object(PyObject *self, PyObject *object)
 {
-    //LOGF();
+    //__function__
 
     ///
     auto node = reinterpret_cast<Py_node_object*> (object);
     auto node_ptr = Py_get<GL::dummy_node>(node->node_ptr);
-    //COUT << "object name: " << node_ptr->name_ << "type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ENDL;
+    //COUT << "object name: " << node_ptr->name_ << "type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ENDL;
 
     ///
     auto self_node = reinterpret_cast<Py_node_object*> (self);
-    auto self_node_ptr = Py_get<GL::ICLASS(node)>(self_node->node_ptr);
+    auto self_node_ptr = Py_get<GL::node_>(self_node->node_ptr);
 
     ///
-    auto shared_ptr = std::make_shared<GL::ICLASS(node)>();
+    auto shared_ptr = std::make_shared<GL::node_>();
     shared_ptr.reset(node_ptr);
 
     self_node_ptr->add(node_ptr->name_, shared_ptr);
@@ -320,11 +320,11 @@ void Py_node_add_object(PyObject *self, PyObject *object)
 static PyObject *
 Py_node_add(PyObject *self, PyObject *args, PyObject *keywds)
 {
-    LOGF();
+    __function__
 {
     auto so = reinterpret_cast<Py_node_object*> (self);
     auto node_ptr = Py_get<GL::dummy_node>(so->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
+    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 }
 
     static const char *kwlist[] = {"node", NULL};
@@ -353,16 +353,16 @@ Py_node_add(PyObject *self, PyObject *args, PyObject *keywds)
 
 void Py_node_erase_object(PyObject *self, PyObject *object)
 {
-    //LOGF();
+    //__function__
 
     ///
     auto node = reinterpret_cast<Py_node_object*> (object);
     auto node_ptr = Py_get<GL::dummy_node>(node->node_ptr);
-    //COUT << "object name: " << node_ptr->name_ << " type: " << (node_ptr ? typeid_name(node_ptr):"nullptr") << ENDL;
+    //COUT << "object name: " << node_ptr->name_ << " type: " << (node_ptr ? __typeid_name(node_ptr):"nullptr") << ENDL;
 
     ///
     auto self_node = reinterpret_cast<Py_node_object*> (self);
-    auto self_node_ptr = Py_get<GL::ICLASS(node)>(self_node->node_ptr);
+    auto self_node_ptr = Py_get<GL::node_>(self_node->node_ptr);
 
     self_node_ptr->erase(node_ptr->name_);
 }
@@ -371,12 +371,12 @@ void Py_node_erase_object(PyObject *self, PyObject *object)
 static PyObject *
 Py_node_erase(PyObject *self, PyObject *args, PyObject *keywds)
 {
-    LOGF();
+    __function__
 
 {
     auto so = reinterpret_cast<Py_node_object*> (self);
     auto node_ptr = Py_get<GL::dummy_node>(so->node_ptr);
-    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
+    COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 }
 
     static const char *kwlist[] = {"node", NULL};
@@ -441,7 +441,7 @@ PyTypeObject Py_node_type = {
 static PyObject *
 keywdarg_parrot(PyObject *self, PyObject *args, PyObject *keywds)
 {
-    LOGF();
+    __function__
 
     int voltage;
     const char *state = "a stiff";

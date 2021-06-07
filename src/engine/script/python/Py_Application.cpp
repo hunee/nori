@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -28,7 +28,7 @@ static PyObject * PyApplication_error_;
 static PyObject *
 PyApplication_dataPath(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
 
     auto amgr = asset_manager::get();    
     return PyUnicode_FromString(amgr->data_path());
@@ -45,7 +45,7 @@ PyApplication_dataPath(PyObject *self, PyObject *args)
 static PyObject *
 PyApplication_dummy_runLoop(PyObject *self, PyObject *args)
 {
- //   LOGF();
+ //   __function__
     
     int command;
     int sts = 1;
@@ -76,7 +76,7 @@ static PyObject * PyApplication_runLoop_ = NULL;
 static PyObject *
 PyApplication_set_runLoop(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
     
     PyObject *result = NULL;
     PyObject *temp;
@@ -111,7 +111,7 @@ PyApplication_set_runLoop(PyObject *self, PyObject *args)
 static PyObject *
 PyApplication_runLoop(PyObject *self, PyObject *args)
 {
-    LOGF();
+    __function__
     
     return PyObject_CallObject(PyApplication_runLoop_, args);
 }
@@ -185,7 +185,7 @@ int PyApplication_runLoop(int arg)
  */
 static int PyApplication_set_runLoop(PyCFunction method)
 {
-    //LOGF();
+    //__function__
     
     static PyMethodDef runLoop_method = {
         "runLoop",
@@ -225,7 +225,7 @@ static const char* PyAppication_Version_ = "0.0.1";
 PyMODINIT_FUNC 
 PyInit_Application(void)
 {
-///    LOGF();
+///    __function__
         
     ///
     PyObject *m;
@@ -290,7 +290,7 @@ PyInit_Application(void)
         PyDict_SetItemString(d, "root", (PyObject *) v);
         Py_DECREF(v);
 
-        ///COUT << "name: \"" << theApp->root_ << "\", type: " << typeid_name(*theApp->root_) << ", use_count: " << theApp->root_.use_count() << ENDL;
+        ///COUT << "name: \"" << theApp->root_ << "\", type: " << __typeid_name(*theApp->root_) << ", use_count: " << theApp->root_.use_count() << ENDL;
     }
 
     ///

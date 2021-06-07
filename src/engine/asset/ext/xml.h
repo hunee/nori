@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -12,13 +12,13 @@ namespace ext {
  * @brief
  * 
  */
-class ICLASS(xml_parser) {
+class xml_parser_ {
 public:
-	virtual ~ICLASS(xml_parser)() {}
+	virtual ~xml_parser_() {}
 
 public:
 	// pure virtual function providing interface framework.
-	virtual std::shared_ptr<ICLASS(asset)> parser(const XMLElement*) =0;
+	virtual std::shared_ptr<asset_> parser(const XMLElement*) =0;
 };
 
 
@@ -27,9 +27,9 @@ public:
  * 
  */
 template <typename ext>
-class xml_parser : public ICLASS(xml_parser), public ext {
+class xml_parser : public xml_parser_, public ext {
 public:
-	std::shared_ptr<ICLASS(asset)> parser(const XMLElement* element) override
+	std::shared_ptr<asset_> parser(const XMLElement* element) override
 	{
     return ext::parser(element);
   }
@@ -41,7 +41,7 @@ public:
  * 
  */
 class xml 
-: public std::map<const std::string, std::unique_ptr<ICLASS(xml_parser)>> {
+: public std::map<const std::string, std::unique_ptr<xml_parser_>> {
 
 public:
 	
@@ -52,9 +52,9 @@ public:
 	 * @param name 
 	 * @return std::shared_ptr<T> 
 	 */
-	std::shared_ptr<ICLASS(asset)> parser(const std::string& name, const XMLElement *element)
+	std::shared_ptr<asset_> parser(const std::string& name, const XMLElement *element)
 	{
-		//CLOGF();
+		//__method__
 
 		auto it = find(name);
 		if (it != end())
@@ -70,11 +70,11 @@ public:
 	 * @brief 
 	 * 
 	 * @param pathname 
-	 * @return std::shared_ptr<ICLASS(asset)> 
+	 * @return std::shared_ptr<asset_> 
 	 */
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname)
+	std::shared_ptr<asset_> import(const std::string& pathname)
 {
-  //CLOGF();
+  //__method__
 
 	XMLDocument doc;
 	doc.LoadFile(pathname.c_str());
@@ -126,11 +126,11 @@ public:
 	 */
 	void dump()
 	{
-		//CLOGF();
+		//__method__
 
 		for (auto&& kv : *this)
 		{
-      COUT << "parser ext: \"" << kv.first << "\", type: " << typeid_name(*kv.second) << ENDL;
+      COUT << "parser ext: \"" << kv.first << "\", type: " << __typeid_name(*kv.second) << ENDL;
 		}
 	}
 };

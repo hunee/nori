@@ -22,7 +22,7 @@ typedef struct {
 static int
 Custom_traverse(CustomObject *self, visitproc visit, void *arg)
 {
-    LOGF();
+    __function__
 
     Py_VISIT(self->first);
     Py_VISIT(self->last);
@@ -32,7 +32,7 @@ Custom_traverse(CustomObject *self, visitproc visit, void *arg)
 static int
 Custom_clear(CustomObject *self)
 {
-    LOGF();
+    __function__
 
     //if (self->first)
     Py_CLEAR(self->first);
@@ -45,7 +45,7 @@ Custom_clear(CustomObject *self)
 static void
 Custom_dealloc(CustomObject *self)
 {
-    LOGF();
+    __function__
 
     PyObject_GC_UnTrack(self);
     Custom_clear(self);
@@ -86,7 +86,7 @@ public:
 static PyObject *
 Custom_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
-    LOGF();
+    __function__
 
     CustomObject *self;
     self = (CustomObject *) type->tp_alloc(type, 0);
@@ -110,7 +110,7 @@ Custom_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 static int
 Custom_init(CustomObject *self, PyObject *args, PyObject *kwds)
 {
-    LOGF();
+    __function__
 
     static const char *kwlist[] = {"first", "last", "number", NULL};
     PyObject *first = NULL, *last = NULL, *tmp;
@@ -232,7 +232,7 @@ static PyMethodDef Custom_methods[] = {
 static PyObject *
 Custom_name(CustomObject *self, PyObject *Py_UNUSED(ignored))
 {
-    LOGF();
+    __function__
 
     return PyUnicode_FromFormat("%S %S", self->first, self->last);
 /*
@@ -249,7 +249,7 @@ return (PyObject*) pp;
 static PyObject *
 keywdarg_parrot(PyObject *self, PyObject *args, PyObject *keywds)
 {
-    //LOGF();
+    //__function__
 
     int voltage;
     const char *state = "a stiff";
@@ -394,7 +394,7 @@ while (PyDict_Next(self->dict, &pos, &key, &value)) {
 
 if (obj != nullptr && PyDict_Check(obj))
 {
-    LOGF();
+    __function__
 
     PyObject *key, *value;
     Py_ssize_t pos = 0;

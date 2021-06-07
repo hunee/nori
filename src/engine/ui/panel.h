@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -37,7 +37,7 @@ void _tick(double dt) override
 
 void _draw() override
 {
-		///CLOGF();
+		///__method__
 
 	frame_rect::_draw();
 }

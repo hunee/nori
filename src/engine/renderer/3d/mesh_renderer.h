@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -10,11 +10,11 @@ namespace GL::_3d {
  * @brief 
  * 
  */
-class mesh_renderer : public ICLASS(renderer) {
+class mesh_renderer : public base_renderer {
 public:
 	mesh_renderer()
 	{
-  //CLOGF();		
+  //__method__		
 
 	vb_ = std::make_unique<GL_buffer_<V2F_C4B, GL_ARRAY_BUFFER, GL_TRIANGLE_STRIP, GL_WRITE_ONLY>>(4);
 	shader_ = asset_manager::get()->import<GL::shader>(asset_path("box.shader.xml"));
@@ -104,7 +104,7 @@ catch (std::exception& e) {
 	COUT << e.what() << ENDL;
 }		
 
-	ICLASS(renderer)::draw();
+	base_renderer::draw();
 }
 
 

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -6,9 +6,9 @@ namespace ext {
 
 class EXT_jpeg {
 public:
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname)
+	std::shared_ptr<asset_> import(const std::string& pathname)
 	{
-		//CLOGF();
+		//__method__
 
         auto p = std::make_shared<asset_ptr<GLtexture>>();
         ///p->reset(new GLtexture());

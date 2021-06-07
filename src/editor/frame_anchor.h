@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -22,13 +22,17 @@ class frame_anchor
 public:
 	std::shared_ptr<component<GL::ui::anchor>> ac_;	
 
+	frame_anchor() {
+		__method__
+	}
+
 	void set_ancher(std::shared_ptr<component<GL::ui::anchor>>& ac)
 	{
 		ac_ = ac;
 	}
 
 	std::shared_ptr<component<_3d::mesh_renderer>> mrc_;	
-	//std::shared_ptr<ICLASS(component)> trr2_;	
+	//std::shared_ptr<component_> trr2_;	
 
 	std::shared_ptr<GL::_3d::mesh> mesh_;
 
@@ -53,7 +57,7 @@ void _began() override
 
 	void _draw() override
 	{
-		//CLOGF();
+		//__method__
 
 		frame_rect::_draw();
 	}

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -14,6 +14,7 @@ unsigned int align_;// = GL::ALIGN_RIGHT | GL::ALIGN_BOTTOM;
 
 anchor()
 {
+	//__method__
 }
 
 GL::point get_align(unsigned int align, const GL::rect& rect, const GL::size& size)
@@ -36,6 +37,8 @@ GL::point get_align(unsigned int align, const GL::rect& rect, const GL::size& si
 //void _tick(double dt) override
 void align()
 {
+	//__method__
+
 	//owner
 	GL::rect rect;
 

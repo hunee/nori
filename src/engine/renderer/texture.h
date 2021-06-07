@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -8,11 +8,11 @@ namespace GL {
  * @brief 
  * 
  */
-class texture : public GL::size, public _type_info<texture> {
+class texture : public GL::size, public __type_info<texture> {
 public:
 	virtual ~texture()
 	{
-		//CLOGF();		
+		//__method__		
 	}
 
 public:

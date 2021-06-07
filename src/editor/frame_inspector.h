@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -28,7 +28,7 @@ class frame_inspector
 	//std::unique_ptr<_2d::texture_renderer> trr2_;	
 	
 	std::shared_ptr<component<_2d::texture_renderer>> trr2_;	
-	//std::shared_ptr<ICLASS(component)> trr2_;	
+	//std::shared_ptr<component_> trr2_;	
 
 	std::shared_ptr<texture> tex0_;
 
@@ -44,7 +44,7 @@ public:
 	,_highlightColor(0xfffb9700)
 	,_darkColor(0xff636262)
 	{
-		///YLOGF();
+		__method__
 
 		trr_ = std::make_unique<_2d::texture_renderer>(bmfont_->texture());
   	tex0_ = asset_manager::get()->import<GL::texture>(asset_path("artplant_poster.tga"));
@@ -57,13 +57,13 @@ void init()
 				{
 		//std::make_unique<GL::node<GL::frame_rect> >("frame_rect");
 		trr2_ = std::make_shared<component<_2d::texture_renderer>>("trr2");
-		///COUT << "name: " << trr2_->name_ << " type: " << typeid_name(*trr2_) << ", use_count: " << trr2_.use_count() << " owner: " << trr2_->owner() << ENDL;
+		///COUT << "name: " << trr2_->name_ << " type: " << __typeid_name(*trr2_) << ", use_count: " << trr2_.use_count() << " owner: " << trr2_->owner() << ENDL;
 		
 		add("trr2", trr2_);
 		
-		//COUT << "name: " << trr2_->name_ << " type: " << typeid_name(*trr2_) << ", use_count: " << trr2_.use_count() << " owner: " << trr2_->owner() << ENDL;
+		//COUT << "name: " << trr2_->name_ << " type: " << __typeid_name(*trr2_) << ", use_count: " << trr2_.use_count() << " owner: " << trr2_->owner() << ENDL;
 		//auto owner = trr2_->owner();
-		//COUT << "oname: " << owner->name_ << " type: " << typeid_name(*owner) << ", use_count: " << owner.use_count() << ENDL;
+		//COUT << "oname: " << owner->name_ << " type: " << __typeid_name(*owner) << ", use_count: " << owner.use_count() << ENDL;
 
 		trr2_->set_texture(tex0_);
 
@@ -71,7 +71,7 @@ void init()
 		//trr2_->rect_.right = 200;
 		//trr2_->rect_.bottom = 200;
 		
-		//COUT << "type: " << typeid_name(*trr2_) << ", use_count: " << trr2_.use_count() << ENDL;
+		//COUT << "type: " << __typeid_name(*trr2_) << ", use_count: " << trr2_.use_count() << ENDL;
 				}
 
 	//throw std::runtime_error("e");
@@ -85,7 +85,7 @@ void init()
 		//std::dynamic_pointer_cast<_2d::texture_renderer>(trr2_)->set_texture(tex0_);
 		
 		//(*this)["1"] = trr2_;
-		//(*this)["1"] = dynamic_pointer_cast<ICLASS(component)>(trr2_);
+		//(*this)["1"] = dynamic_pointer_cast<component_>(trr2_);
 		//add("1", trr2_);
 		}
 
@@ -147,12 +147,12 @@ void init()
 
 void _began() override
 {
-	//CLOGF();
+	//__method__
 
 	init();	
 		
 		/*auto n = node_ptr();
-		COUT << "oname: " << n->name_ << " type: " << typeid_name(*n) << ENDL;
+		COUT << "oname: " << n->name_ << " type: " << __typeid_name(*n) << ENDL;
 		COUT << "this: " << this << " node_ptr: " << n << ENDL;
 */
 //add("trr2", trr2_);
@@ -160,7 +160,7 @@ void _began() override
 
 void _tick(double dt) override
 {
-	///YLOGF();
+	///__FUNC_YEL__
 	object::_tick(dt);
 
 	auto fb = GL_framebuffer::get();
@@ -174,7 +174,7 @@ void _tick(double dt) override
 
 	void _draw() override
 	{
-		//CLOGF();
+		//__method__
 
 /*
 		auto fb = GL_framebuffer::get();
@@ -219,13 +219,13 @@ void _tick(double dt) override
 		auto n = node_ptr(); //node
 		auto o = n->owner(); //component, parent
 
-		COUT << "name: " << n->name_ << " type: " << typeid_name(*n) << ENDL;
-		COUT << "oname: " << o->name_ << " type: " << typeid_name(*o) << ENDL;
+		COUT << "name: " << n->name_ << " type: " << __typeid_name(*n) << ENDL;
+		COUT << "oname: " << o->name_ << " type: " << __typeid_name(*o) << ENDL;
 
 		//auto p = std::dynamic_pointer_cast<ICLASS(object)>(o);
-		auto p = std::dynamic_pointer_cast<ICLASS(node)>(o);
+		auto p = std::dynamic_pointer_cast<node_>(o);
 		if (p)
-			COUT << "type: " << typeid_name(*p) << ENDL;
+			COUT << "type: " << __typeid_name(*p) << ENDL;
 */
 
 		transform_.x = 0;

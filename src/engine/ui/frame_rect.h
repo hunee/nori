@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -44,6 +44,7 @@ frame_rect()
 ,	dark_color_(0xff636262)
 , color_(background_color_)
 {
+	//__method__
 }
 
 public:
@@ -56,6 +57,8 @@ public:
 
   void _began() override
   {
+		//__method__
+
     frc_ = std::make_shared<component<GL::_2d::frame_renderer>>("frc");		
     add("frc", frc_);
 
@@ -93,7 +96,7 @@ public:
 
 	virtual void _draw() override
 	{
-		///CLOGF();
+		///__method__
 
 GL::rect rect(transform_.x2,transform_.y2, transform_.x2+rect_.width, transform_.y2+rect_.height);
 
@@ -102,7 +105,7 @@ if (ic_->focus_)// && action_ == GLFW_PRESS && key_ == GLFW_MOUSE_BUTTON_LEFT)
 		frc_->draw_rect(rect, highlight_color_,dark_color_, background_color_);
 
     char fps[PATH_MAX];
-    std::sprintf(fps, "%s(%s)\n: %.f,%.f (%.f, %.f)", ptr()->name_.c_str(), typeid_name(*this), transform_.x2,transform_.y2, transform_.x,transform_.y);
+    std::sprintf(fps, "%s(%s)\n: %.f,%.f (%.f, %.f)", ptr()->name_.c_str(), __typeid_name(*this), transform_.x2,transform_.y2, transform_.x,transform_.y);
 
     GL::point pos(transform_.x2,transform_.y2);
     bmfrc_->textout(pos, fps, 0xffffffff);

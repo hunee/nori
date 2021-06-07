@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -14,7 +14,7 @@ inline PyObject* Py_new()
 { 
     return PyCapsule_New((void *) new T, "", [](PyObject* p) 
         { 
-            LOGF();
+            __function__
             delete static_cast<T*> (PyCapsule_GetPointer(p, "")); 
         }
     );
@@ -25,7 +25,7 @@ inline PyObject* Py_new2(const std::string& name)
 { 
     return PyCapsule_New((void *) new T(name), "", [](PyObject* p) 
         {
-            LOGF(); 
+            __function__ 
             delete static_cast<T*> (PyCapsule_GetPointer(p, ""));
         }
     );

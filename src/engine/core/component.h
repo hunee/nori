@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -9,18 +9,18 @@ namespace GL {
  * @brief 
  * 
  */
-class ICLASS(component)
-: public std::enable_shared_from_this<ICLASS(component)> {
+class component_
+: public std::enable_shared_from_this<component_> {
 public:
-	std::shared_ptr<ICLASS(component)> get_shared_ptr() { return shared_from_this(); }
+	std::shared_ptr<component_> get_shared_ptr() { return shared_from_this(); }
 
 public:
-	std::weak_ptr<ICLASS(component)> owner_;
-	const std::shared_ptr<ICLASS(component)> owner() const 
+	std::weak_ptr<component_> owner_;
+	const std::shared_ptr<component_> owner() const 
 	{
 		return owner_.lock(); 
 	}
-	void set_owner(const std::shared_ptr<ICLASS(component)>& owner)
+	void set_owner(const std::shared_ptr<component_>& owner)
 	{
 		owner_ = owner;
 	}
@@ -37,11 +37,11 @@ public:
 	}
 
 public:
-	ICLASS(component)() {}
-	ICLASS(component)(const std::string& name) : name_(name) {}
-	ICLASS(component)(const std::string& name, const std::shared_ptr<ICLASS(component)>& owner) : name_(name), owner_(owner)	{}
+	component_() {}
+	component_(const std::string& name) : name_(name) {}
+	component_(const std::string& name, const std::shared_ptr<component_>& owner) : name_(name), owner_(owner)	{}
 
-	virtual ~ICLASS(component)() {}
+	virtual ~component_() {}
 
 public:
 	virtual void _began() {}
@@ -57,10 +57,10 @@ public:
  * 
  */
 template <typename T>
-class component : public ICLASS(component), public T {
+class component : public component_, public T {
 public:
 	component(const std::string& name)
-	: ICLASS(component)(name) {}
+	: component_(name) {}
 
 public:
 	void _tick(double dt) override

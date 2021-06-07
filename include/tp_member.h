@@ -7,17 +7,17 @@
  *
  */
 template <typename V>
-class ICLASS(tp_member) {
+class member_ {
 protected:
 	void* target_;
 	
 public:
-	virtual ~ICLASS(tp_member)()
+	virtual ~member_()
 	{
 	}
 	
 	template <typename T>
-	ICLASS(tp_member)(T* target)
+	member_(T* target)
 	: target_(target)
 	{
 	}	
@@ -32,14 +32,14 @@ public:
  * member
  */
 template <typename V>
-class tp_member : public ICLASS(tp_member)<V> {
+class tp_member : public member_<V> {
 protected:
-	void* member_;
+	void* ptr_;
 	
 public:
 	template <typename T, typename M>
 	tp_member(T* target, M member)
-	: ICLASS(tp_member)<V>(target)
+	: member_<V>(target)
 	{
 		union {
 			M m;
@@ -52,14 +52,14 @@ public:
 		for (size_t i=0; i<sizeof(M); ++i)
 			ptr[i] = mu.b[i];
 		
-		member_ = ptr;
+		ptr_ = ptr;
 	}
 	~tp_member()
 	{
-		if (member_)
+		if (ptr_)
 		{
-			free(member_);
-			member_ = nullptr;
+			free(ptr_);
+			ptr_ = nullptr;
 		}
 	}
 	
@@ -69,10 +69,10 @@ public:
 		struct _T{};
 		typedef V _T::*M;
 		
-		M* member_ptr = static_cast<M*> (member_);
-		M member = *member_ptr;
+		M* mptr = static_cast<M*> (ptr_);
+		M member = *mptr;
 		
-		((_T*) ICLASS(tp_member)<V>::target_)->*member = value;
+		((_T*) member_<V>::target_)->*member = value;
 	}
 
 	V get() const
@@ -80,10 +80,10 @@ public:
 		struct _T{};
 		typedef V _T::*M;
 		
-		M* member_ptr = static_cast<M*> (member_);
-		M member = *member_ptr;
+		M* mptr = static_cast<M*> (ptr_);
+		M member = *mptr;
 		
-		return ((_T*) ICLASS(tp_member)<V>::target_)->*member;
+		return ((_T*) member_<V>::target_)->*member;
 	}
 };
 
@@ -93,7 +93,7 @@ public:
  * function
  */
 template <typename V>
-class tp_getset : public ICLASS(tp_member)<V> {
+class getset : public member_<V> {
 private:
 	void* getter_;
 	void* setter_;
@@ -135,14 +135,14 @@ private:
 
 public:
 	template <typename T, typename Getter, typename Setter>
-	tp_getset(T* target, Getter getter, Setter setter)
-	: ICLASS(tp_member)<V>(target)
+	getset(T* target, Getter getter, Setter setter)
+	: member_<V>(target)
 	{
 		set_getter<Getter>(getter);
 		set_setter<Setter>(setter);
 	}
 	
-	~tp_getset()
+	~getset()
 	{
 		if(getter_)
 		{
@@ -169,7 +169,7 @@ public:
 		M* method_ptr = static_cast<M*> (setter_);
 		M method = *method_ptr;
 		
-		(((_T*) ICLASS(tp_member)<V>::target_)->*method) (value);
+		(((_T*) member_<V>::target_)->*method) (value);
 	}
 	
 	
@@ -184,7 +184,7 @@ public:
 		M* method_ptr = static_cast<M*> (getter_);
 		M method = *method_ptr;
 		
-		return (((_T*) ICLASS(tp_member)<V>::target_)->*method) ();
+		return (((_T*) member_<V>::target_)->*method) ();
 	}
 };
 
@@ -192,16 +192,16 @@ public:
 /**
  *
  */
-class ICLASS(tp_member_ptr) {
+class member_ptr_ {
 protected:
 	void* tp_ptr_;
 	
 public:
-	virtual ~ICLASS(tp_member_ptr)()
+	virtual ~member_ptr_()
 	{
 		if (tp_ptr_)
 		{
-			ICLASS(tp_member)<int>* p = static_cast<ICLASS(tp_member)<int>*>(tp_ptr_);
+			member_<int>* p = static_cast<member_<int>*>(tp_ptr_);
 			delete p;
 			
 			tp_ptr_ = nullptr;
@@ -214,14 +214,14 @@ public:
 	template <typename V>
 	void set(V value)
 	{
-		ICLASS(tp_member)<V>* p = static_cast<ICLASS(tp_member)<V>*>(tp_ptr_);
+		member_<V>* p = static_cast<member_<V>*>(tp_ptr_);
 		p->set(value);
 	}
 	
 	template <typename V>
 	V get() const
 	{
-		ICLASS(tp_member)<V>* p = static_cast<ICLASS(tp_member)<V>*>(tp_ptr_);
+		member_<V>* p = static_cast<member_<V>*>(tp_ptr_);
 		return p->get();
 	}
 };
@@ -232,18 +232,18 @@ public:
  *
  */
 template <typename V>
-class tp_member_ptr : public ICLASS(tp_member_ptr) {
+class member_ptr : public member_ptr_ {
 public:
 	template <typename T, typename M>
-	tp_member_ptr(T* target, M member)
+	member_ptr(T* target, M member)
 	{
 		tp_ptr_ = new tp_member<V>(target, member);
 	}
 	
 	template <typename T, typename Getter, typename Setter>
-	tp_member_ptr(T* target, Getter getter, Setter setter)
+	member_ptr(T* target, Getter getter, Setter setter)
 	{
-		tp_ptr_ = new tp_getset<V>(target, getter, setter);
+		tp_ptr_ = new getset<V>(target, getter, setter);
 	}
 
 ///

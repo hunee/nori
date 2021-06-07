@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -54,7 +54,7 @@ public:
 public:
 	void bind() override
 	{
-		//CLOGF();
+		//__method__
 
 		glBindTexture(target, handle_);		
 	}
@@ -71,7 +71,7 @@ class GL_texture_
 public:
 	void texImage(int level, size_t width, size_t height, const void* pixels)
 	{
-		//CLOGF();
+		//__method__
 
 		size::x = width; 
 		size::y = height;
@@ -126,7 +126,7 @@ public:
 
 	void texImage(int level, size_t width, size_t height, const void* pixels)
 	{
-		//CLOGF();
+		//__method__
 
 		size::x = width;
 		size::y = height;

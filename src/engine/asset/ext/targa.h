@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -14,9 +14,9 @@ namespace ext {
 	
 class targa {
 public:
-	std::shared_ptr<ICLASS(asset)> import(const std::string& pathname)
+	std::shared_ptr<asset_> import(const std::string& pathname)
 {
-  //CLOGF();
+  //__method__
 
 	tga_image tga;
 	tga_result result = tga_read(&tga, pathname.c_str());
@@ -38,7 +38,7 @@ public:
 
 
 /////
-  std::shared_ptr<ICLASS(asset)> texture = nullptr;
+  std::shared_ptr<asset_> texture = nullptr;
 
   try {
     switch (tga.pixel_depth)

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #include "stdafx.h"
 
@@ -31,7 +31,7 @@ const char * glGetShaderLanguageVersion()
  */
 void check_GLextensions()
 {
-	//LOGF();
+	//__function__
 
 #ifdef __GL_EXT_GLEW
   if (glewInit() != GLEW_OK)

@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
+/* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
 
@@ -13,26 +13,26 @@ namespace GL {
 class pass : 
 	public program, public T {	
 public:
-	virtual ~pass() { /*CLOGF();*/ }
+	virtual ~pass() { /*__method__*/ }
 
 public:
 	void bind()
 	{
-		//CLOGF();
+		//__method__
 /*
 		for (auto&& p : *this)
 		{
-      COUT << "p: \"" << p.first << "\", type: " << typeid_name(*p.second) << ENDL;
+      COUT << "p: \"" << p.first << "\", type: " << __typeid_name(*p.second) << ENDL;
 		}*/
 	}
 
 	void dump()
 	{
-		//CLOGF();
+		//__method__
 
 		for (auto&& p : *this)
 		{
-      COUT << "program name: \"" << p.first << "\", type: " << typeid_name(*p.second) << ENDL;
+      COUT << "program name: \"" << p.first << "\", type: " << __typeid_name(*p.second) << ENDL;
 		}
 	}
 
