@@ -6,7 +6,7 @@
 
 #include "os/input.h"
 
-#include "renderer/picker.h"
+#include "ui/picker.h"
 
 namespace GL::ui {
 

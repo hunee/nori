@@ -3,8 +3,8 @@
 #pragma once
 
 /////
-#include "tp_member.h"
-#include "tp_method.h"
+#include "member.h"
+#include "method.h"
 
 #include <functional>
 
@@ -14,10 +14,7 @@ namespace GL::_2d {
 class moveto 
 : public owner_ptr {
 public:
-	moveto()
-	{
-		__method__
-	}
+	moveto() {}
 
 public:
 	float fps_ = 120;

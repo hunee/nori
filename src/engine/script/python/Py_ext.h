@@ -14,7 +14,7 @@ inline PyObject* Py_new()
 { 
     return PyCapsule_New((void *) new T, "", [](PyObject* p) 
         { 
-            __function__
+            __py_function__
             delete static_cast<T*> (PyCapsule_GetPointer(p, "")); 
         }
     );
@@ -25,7 +25,7 @@ inline PyObject* Py_new2(const std::string& name)
 { 
     return PyCapsule_New((void *) new T(name), "", [](PyObject* p) 
         {
-            __function__ 
+            __py_function__ 
             delete static_cast<T*> (PyCapsule_GetPointer(p, ""));
         }
     );

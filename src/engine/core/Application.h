@@ -6,6 +6,7 @@
 
 #include "node.h"
 
+
 //namespace GL {
 
 /**
@@ -20,6 +21,7 @@ class Application
 
 public:
 	std::shared_ptr<GL::node_> root_;
+
 
 /**
  *

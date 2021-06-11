@@ -29,11 +29,12 @@ public:
 	void dump()
 	{
 		//__method__
-
+#if 0
 		for (auto&& p : *this)
 		{
       COUT << "program name: \"" << p.first << "\", type: " << __typeid_name(*p.second) << ENDL;
 		}
+#endif		
 	}
 
 };//shader

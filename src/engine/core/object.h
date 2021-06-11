@@ -65,7 +65,7 @@ public:
 	}
 
 public:
-	template <typename T = component_>
+	template <typename T=component_>
 	void add(const std::string& name, std::shared_ptr<T> component)
 //	void add(const std::string& name, std::shared_ptr<component_> component)	
 	{

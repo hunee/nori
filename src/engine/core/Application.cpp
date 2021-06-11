@@ -7,6 +7,8 @@
 #include "renderer/texture.h"
 #include "renderer/shader.h"
 
+#include "renderer/camera.h"
+
 #include "Application.h"
 
 #include "asset/ext/png.h"
@@ -399,7 +401,18 @@ int Application::init()
   init_asset_manager();
 
   //root_ = std::make_unique<GL::node<GL::dummy> >("dummy");
-root_ = std::make_shared<GL::dummy_node>("dummy");
+//root_ = std::make_shared<GL::dummy_node>("dummy");
+root_ = std::make_shared<GL::node<GL::object> >("root");
+
+{
+    ///std::shared_ptr<GL::component<GL::camera>> cc_;	
+    auto cc_ = std::make_shared<GL::component<GL::camera> >("cc");
+    cc_->ortho();
+
+    auto p = std::dynamic_pointer_cast<GL::object>(root_);
+    p->add("cc", cc_);
+}
+
 auto fi = std::make_shared<GL::node<GL::frame_view> >("frame_view", root_)->add();
 fi->_began();
 

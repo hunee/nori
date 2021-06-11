@@ -282,13 +282,20 @@ PyInit_Application(void)
         auto v = PyObject_New(Py_node_object, &Py_node_type);
 
         auto p = theApp->root_.get();
+        ///COUT << "-- ref_count 1: " << Py_REFCNT(v) << ENDL;
+
         v->node_ptr = Py_ptr(p);
         v->owner = nullptr;
         v->name = PyUnicode_FromString("root_");
         v->number = 100;
 
         PyDict_SetItemString(d, "root", (PyObject *) v);
+
+        ///COUT << "-- ref_count 2: " << Py_REFCNT(v) << ENDL;
+
         Py_DECREF(v);
+
+        ///COUT << "-- ref_count 1: " << Py_REFCNT(v) << ENDL;
 
         ///COUT << "name: \"" << theApp->root_ << "\", type: " << __typeid_name(*theApp->root_) << ", use_count: " << theApp->root_.use_count() << ENDL;
     }

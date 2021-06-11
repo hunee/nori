@@ -61,7 +61,7 @@ ${SRC_DIR}/engine/asset/ext/fbx.cpp
 ${SRC_DIR}/engine/renderer/GL/GL_ext.cpp
 ${SRC_DIR}/engine/renderer/GL/GL_state.cpp
 
-${SRC_DIR}/engine/renderer/picker.cpp
+${SRC_DIR}/engine/ui/picker.cpp
 
 #python
 ${SRC_DIR}/engine/script/python/Py_Application.cpp
@@ -166,8 +166,11 @@ set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
 
 #include(CheckIncludeFile)
 
+# https://github.com/nothings/stb
+
 #
 # GLEW
+# https://github.com/nigels-com/glew
 #
 # make extensions
 # make
@@ -213,6 +216,7 @@ endif() #GLEW_DIRS
 
 #
 # GLFW
+# https://github.com/glfw/glfw
 #
 # cmake .
 # make
@@ -260,6 +264,7 @@ endif() #GLFW_DIRS
 
 #
 # jsoncpp
+# https://github.com/open-source-parsers/jsoncpp
 #
 # mkdir jsoncpp-build; cd jsoncpp-build; cmake ../
 # make
@@ -303,99 +308,55 @@ if (JSONCPP_DIRS)
 endif() #JSONCPP_DIRS
 
 
-
 #
-# FREETYPE2
-#
-# cmake . 
-# make
-#[[
-set(FREETYPE2_NAME freetype-2.10.4)
-find_path(
-    FREETYPE2_DIRS 
-    NAMES ${FREETYPE2_NAME}
-    HINTS ${DEPS_DIRS}
-    NO_DEFAULT_PATH
-)
-
-if (FREETYPE2_DIRS)
-    set(FREETYPE2_DIRS ${FREETYPE2_DIRS}/${FREETYPE2_NAME})
-    
-    set(FREETYPE2_INCLUDE_DIRS ${FREETYPE2_DIRS}/include)
-    set(FREETYPE2_LIBRARY_DIRS ${FREETYPE2_DIRS}/objs/.libs)
-
-    message(STATUS "FREETYPE2_DIRS: ${FREETYPE2_DIRS}")
-
-    message(STATUS "FREETYPE2_INCLUDE_DIRS: ${FREETYPE2_INCLUDE_DIRS}")
-    message(STATUS "FREETYPE2_LIBRARY_DIRS: ${FREETYPE2_LIBRARY_DIRS}")    
-
-    find_library(
-        FREETYPE2_LIBRARIES
-        NAMES libfreetype.a
-        HINTS ${FREETYPE2_LIBRARY_DIRS}
-        REQUIRED
-        NO_DEFAULT_PATH
-    )
-
-    if(FREETYPE2_LIBRARIES)
-        message(STATUS "FREETYPE2_LIBRARIES: ${FREETYPE2_LIBRARIES}")        
-
-        include_directories(${FREETYPE2_INCLUDE_DIRS})
-
-        link_directories(${FREETYPE2_LIBRARY_DIRS})
-        target_link_libraries(${PROJECT_NAME} ${FREETYPE2_LIBRARIES})    
-    endif() #FREETYPE2_LIBRARIES
-endif() #FREETYPE2_DIRS
-]]
-
-
-#
-# FREETYPE2
+# freetype
+# https://github.com/freetype/freetype
 #
 # mkdir build; cd build; 
 # cmake ../; make
 
-set(FREETYPE2_NAME freetype)
+set(FREETYPE_NAME freetype)
 find_path(
-    FREETYPE2_DIRS 
-    NAMES ${FREETYPE2_NAME}
+    FREETYPE_DIRS 
+    NAMES ${FREETYPE_NAME}
     HINTS ${DEPS_DIRS}
     NO_DEFAULT_PATH
 )
 
-if (FREETYPE2_DIRS)
-    set(FREETYPE2_DIRS ${FREETYPE2_DIRS}/${FREETYPE2_NAME})
+if (FREETYPE_DIRS)
+    set(FREETYPE_DIRS ${FREETYPE_DIRS}/${FREETYPE_NAME})
     
-    set(FREETYPE2_INCLUDE_DIRS ${FREETYPE2_DIRS}/include)
-    set(FREETYPE2_LIBRARY_DIRS ${FREETYPE2_DIRS}/build)
+    set(FREETYPE_INCLUDE_DIRS ${FREETYPE_DIRS}/include)
+    set(FREETYPE_LIBRARY_DIRS ${FREETYPE_DIRS}/build)
 
-    message(STATUS "FREETYPE2_DIRS: ${FREETYPE2_DIRS}")
+    message(STATUS "FREETYPE_DIRS: ${FREETYPE_DIRS}")
 
-    message(STATUS "FREETYPE2_INCLUDE_DIRS: ${FREETYPE2_INCLUDE_DIRS}")
-    message(STATUS "FREETYPE2_LIBRARY_DIRS: ${FREETYPE2_LIBRARY_DIRS}")    
+    message(STATUS "FREETYPE_INCLUDE_DIRS: ${FREETYPE_INCLUDE_DIRS}")
+    message(STATUS "FREETYPE_LIBRARY_DIRS: ${FREETYPE_LIBRARY_DIRS}")    
 
     find_library(
-        FREETYPE2_LIBRARIES
+        FREETYPE_LIBRARIES
         NAMES libfreetype.a
-        HINTS ${FREETYPE2_LIBRARY_DIRS}
+        HINTS ${FREETYPE_LIBRARY_DIRS}
         REQUIRED
         NO_DEFAULT_PATH
     )
 
-    if(FREETYPE2_LIBRARIES)
-        message(STATUS "FREETYPE2_LIBRARIES: ${FREETYPE2_LIBRARIES}")        
+    if(FREETYPE_LIBRARIES)
+        message(STATUS "FREETYPE_LIBRARIES: ${FREETYPE_LIBRARIES}")        
 
-        include_directories(${FREETYPE2_INCLUDE_DIRS})
+        include_directories(${FREETYPE_INCLUDE_DIRS})
 
-        link_directories(${FREETYPE2_LIBRARY_DIRS})
-        target_link_libraries(${PROJECT_NAME} ${FREETYPE2_LIBRARIES})    
+        link_directories(${FREETYPE_LIBRARY_DIRS})
+        target_link_libraries(${PROJECT_NAME} ${FREETYPE_LIBRARIES})    
 
-    endif() #FREETYPE2_LIBRARIES
-endif() #FREETYPE2_DIRS
+    endif() #FREETYPE_LIBRARIES
+endif() #FREETYPE_DIRS
 
 
 #
 # libpng
+# http://www.libpng.org/pub/png/libpng.html
 #
 # mkdir build; cd build; cmake ../
 # make
@@ -456,6 +417,7 @@ endif ()
 
 #
 # zlib
+# https://zlib.net
 #
 # mkdir build; cd build; cmake ../
 # make
@@ -498,6 +460,7 @@ if (ZLIB_DIRS)
     endif() #ZLIB_LIBRARIES
 endif() #ZLIB_DIRS
 ]]
+
 find_package(ZLIB REQUIRED)
 if (ZLIB_FOUND)
     message(STATUS "ZLIB_VERSION: ${ZLIB_VERSION_STRING}")
@@ -513,7 +476,8 @@ endif ()
 
 
 #
-# zlib
+# BZip2
+# https://www.sourceware.org/bzip2/
 #
 # mkdir build; cd build; cmake ../
 # make
@@ -535,7 +499,7 @@ endif ()
 
 #
 # fbxsdk
-#
+# https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2
 
 set(FBXSDK_NAME fbxsdk-2020.0.1)
 find_path(
@@ -576,10 +540,10 @@ endif() #FBXSDK_DIRS
 
 
 #
-# LUA
+# lua
+# https://github.com/lua/lua
 #
-# cmake . 
-# make
+# make a
 
 #set(LUA_NAME lua-5.4.1)
 set(LUA_NAME lua)
@@ -593,8 +557,8 @@ find_path(
 if (LUA_DIRS)
     set(LUA_DIRS ${LUA_DIRS}/${LUA_NAME})
     
-    set(LUA_INCLUDE_DIRS ${LUA_DIRS}/src)
-    set(LUA_LIBRARY_DIRS ${LUA_DIRS}/src)
+    set(LUA_INCLUDE_DIRS ${LUA_DIRS})
+    set(LUA_LIBRARY_DIRS ${LUA_DIRS})
 
     message(STATUS "LUA_DIRS: ${LUA_DIRS}")
 
@@ -640,14 +604,13 @@ endif()
 
 
 
+#[[
 #
-# /usr/local/
-#
-
 #
 # ASIO STANDALONE
+# https://think-async.com/Asio/
 #
-#[[
+#
 find_path(Asio_INCLUDE_DIRS
     asio
 )
@@ -661,11 +624,13 @@ if(Asio_INCLUDE_DIRS)
 endif()
 ]]
 
+
+#[[
 #
 # BOOST
+# https://www.boost.org
 #
-#set(BOOST_ROOT /usr/local/Cellar/boost_1_73_0)
-#[[
+#
 set(Boost_USE_STATIC_LIBS       ON)  # only find static libs
 set(Boost_USE_DEBUG_LIBS        OFF) # ignore debug libs and 
 set(Boost_USE_RELEASE_LIBS      ON)  # only find release libs 

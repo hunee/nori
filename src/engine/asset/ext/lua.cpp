@@ -10,9 +10,9 @@
 #include "lua.h"
 
 extern "C" {
-  #include "lua-5.4.1/src/lua.h"
-  #include "lua-5.4.1/src/lauxlib.h"
-  #include "lua-5.4.1/src/lualib.h"
+  #include "lua/lua.h"
+  #include "lua/lauxlib.h"
+  #include "lua/lualib.h"
 }
 
 namespace ext {

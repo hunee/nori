@@ -8,7 +8,7 @@ namespace GL::_2d {
 class texture_frame
 : public owner_ptr {
 public:
-	texture_frame() { __method__ }
+	texture_frame() {}
 	virtual ~texture_frame() {}
 
 public:

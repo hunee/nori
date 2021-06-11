@@ -26,7 +26,6 @@ public:
 label()
 //: color_(0xff2b2b2b)
 {
-	__method__
 }
 
 public:

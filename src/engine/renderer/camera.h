@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "renderer/GL/GL_framebuffer.h"
+
 namespace GL {
 
 class camera {
@@ -36,6 +38,7 @@ void ortho()
 	h_ = fb->height();
 
 	projection_.ortho(0,w_, h_,0, -1024.0f, 1024.0f);
+	//projection_.perspective_fovy(45.0f, (float)w_ / (float)h_, 0.1f, 2000.0f);
 }
 
 float w_,h_;

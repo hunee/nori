@@ -10,7 +10,7 @@ namespace GL::_3d {
  * @brief 
  * 
  */
-class mesh_renderer : public base_renderer {
+class mesh_renderer : public renderer {
 public:
 	mesh_renderer()
 	{
@@ -104,7 +104,7 @@ catch (std::exception& e) {
 	COUT << e.what() << ENDL;
 }		
 
-	base_renderer::draw();
+	renderer::draw();
 }
 
 

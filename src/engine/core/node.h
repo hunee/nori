@@ -83,7 +83,7 @@ public:
 public:
 	virtual void dump()
 	{
-		__method__
+///		__method__
 
 		COUT << "- name: \"" << name_ << "\", type: " << __typeid_name(*this) << ", use_count: " << shared_from_this().use_count() << ENDL;
 

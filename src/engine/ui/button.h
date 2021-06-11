@@ -34,7 +34,7 @@ public:
 	std::string tex0_name_ = "blender_icons.tga";
 
 public:
-	button() { __method__ }
+	button() {}
 
 public:
 	std::shared_ptr<component<GL::ui::button_input>> bic_;	
@@ -54,7 +54,7 @@ public:
 	template <>
 	void add(const std::string& name, std::shared_ptr<asset_> asset)
 {
-__function__
+__break__
 //member::add(name, asset);
 }
 

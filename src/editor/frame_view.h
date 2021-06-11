@@ -189,8 +189,6 @@ else {
 			p->_began();
 		}
 
-__break__
-
 		auto fp2 = std::make_shared<GL::node<GL::ui::sprite> >("ui_sprite", fa)->add();
 		{
 			auto p = dynamic_pointer_cast<GL::ui::sprite>(fp2);
@@ -218,7 +216,7 @@ __break__
 			auto p = dynamic_pointer_cast<GL::ui::button>(ft2);
 			p->transform_.y = 300;
 			p->transform_.z = 1;
-			p->tex0_name_ = "deco_btn01.png";
+			p->tex0_name_ = "Costume_Male_Soldier.png";
 
 			p->_began();
 		}

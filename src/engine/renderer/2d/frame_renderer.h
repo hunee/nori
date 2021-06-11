@@ -10,7 +10,7 @@ namespace GL::_2d {
  * @brief 
  * 
  */
-class frame_renderer : public base_renderer {
+class frame_renderer : public renderer {
 public:
 	frame_renderer()
 	{
@@ -104,7 +104,7 @@ catch (std::exception& e) {
 	COUT << e.what() << ENDL;
 }		
 
-	base_renderer::draw();
+	renderer::draw();
 }
 
 	void draw_rect(const rect& rect, unsigned int highlight_color, unsigned int dark_color)

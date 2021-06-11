@@ -8,8 +8,8 @@
 #include "renderer/GL/GL_texture.h"
 
 /////
-#include "tp_member.h"
-#include "tp_method.h"
+#include "member.h"
+#include "method.h"
 
 #include "object.h"
 
@@ -19,7 +19,7 @@
 namespace GL::_2d {
 
 
-class texture_renderer : public base_renderer {
+class texture_renderer : public renderer {
 public:
 	texture_renderer()
 	{
@@ -108,18 +108,22 @@ public:
 
 		is_renew_ = true;
 
-		pi_ = std::make_unique<tp_member<std::shared_ptr<texture>>>(this, &texture_renderer::tex0_);
+		pi_ = std::make_unique<member<std::shared_ptr<texture>>>(this, &texture_renderer::tex0_);
 		pii_ = std::make_unique<member_ptr<std::shared_ptr<texture>>>(this, &texture_renderer::tex0_);
 
 		pf_ = std::make_unique<tp_method<void>>(this, &texture_renderer::ddd);
 
 		///COUT << "type: " << __typeid_name(*tex0_) << ", pointer: " << tex0_ << ENDL;
 
+		//std::shared_ptr<texture> tex0_;
+		auto ppfi = tex0_;
+		COUT << "type: " << __typeid_name(*ppfi) << ", pointer: " << ppfi << ENDL;
+
 		auto pfi = pi_->get();
-		//COUT << "type: " << __typeid_name(*pfi) << ", pointer: " << pfi << ENDL;
+		COUT << "type: " << __typeid_name(*pfi) << ", pointer: " << pfi << ENDL;
 
 		auto pfii = pii_->get<std::shared_ptr<texture>>();
-		//COUT << "type: " << __typeid_name(*pfii) << ", pointer: " << pfii << ENDL;
+		COUT << "type: " << __typeid_name(*pfii) << ", pointer: " << pfii << ENDL;
 
 		(*pf_)();
 
@@ -262,7 +266,7 @@ catch (std::exception& e) {
 	COUT << e.what() << ENDL;
 }		
 
-	base_renderer::draw();
+	renderer::draw();
 }
 
 	GL::point pos_;

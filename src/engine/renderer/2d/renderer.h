@@ -10,6 +10,8 @@
 
 #include "renderer/camera.h"
 
+#include "core/Application.h"
+
 namespace GL {
 
 /****/
@@ -22,7 +24,7 @@ const int	ALIGN_CENTER = 16;
 const int	ALIGN_IMAGE = 32;
 
 
-class base_renderer {
+class renderer {
 protected:
 	std::unique_ptr<vertex_array> va_;
 	
@@ -30,7 +32,7 @@ protected:
 	std::shared_ptr<shader> shader_;
 	
 public:
-	base_renderer()
+	renderer()
 	{
 		///__FUNC_YEL__
 
@@ -39,11 +41,17 @@ public:
 	  //vb_ = std::make_unique<GL_buffer_<V2F_C4B_T2F, GL_ARRAY_BUFFER, GL_TRIANGLE_STRIP, GL_WRITE_ONLY>>(4);
     //shader_ = asset_manager::get()->import<GL::shader>(asset_path("sprite.shader.xml"));
 
-		cc_ = std::make_shared<component<GL::camera>>("cc");		
-		cc_->ortho();
+		//cc_ = std::make_shared<component<GL::camera>>("cc");		
+		//cc_->ortho();
 
+		auto root = theApp->get()->root_;
+
+		{			
+    auto p = std::dynamic_pointer_cast<GL::object>(root);
+		cc_ = p->get<component<GL::camera>>("cc");
+		}	
 	}
-	virtual ~base_renderer()
+	virtual ~renderer()
 	{	
 	}
 

@@ -13,7 +13,7 @@ namespace GL::_2d {
 #define FONT_TAB_SIZE 2
 
 class font_renderer 
-: public GL::base_renderer {
+: public GL::renderer {
 public:
 	std::shared_ptr<font> font_;
 	
@@ -176,7 +176,7 @@ void set_font(std::shared_ptr<font>& font)
 			vb_->unmap();
 		}
 
-		//base_renderer::draw();
+		//renderer::draw();
 
 GL::float3 vpos(pos.x, pos.y, 0.0f);
 

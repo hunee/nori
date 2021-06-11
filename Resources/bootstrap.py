@@ -26,7 +26,7 @@ status = runLoop(456)
 #print("Application.root - refcount: ", sys.getrefcount(Application.root)-1)
 
 root = Application.root
-#print("root - refcount: ", sys.getrefcount(root)-1)
+print("root - refcount: ", sys.getrefcount(root))
 
 
 #new----------------------------------------------------------------

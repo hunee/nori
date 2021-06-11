@@ -32,13 +32,13 @@ public:
  * member
  */
 template <typename V>
-class tp_member : public member_<V> {
+class member : public member_<V> {
 protected:
 	void* ptr_;
 	
 public:
 	template <typename T, typename M>
-	tp_member(T* target, M member)
+	member(T* target, M member)
 	: member_<V>(target)
 	{
 		union {
@@ -54,7 +54,7 @@ public:
 		
 		ptr_ = ptr;
 	}
-	~tp_member()
+	~member()
 	{
 		if (ptr_)
 		{
@@ -237,7 +237,7 @@ public:
 	template <typename T, typename M>
 	member_ptr(T* target, M member)
 	{
-		tp_ptr_ = new tp_member<V>(target, member);
+		tp_ptr_ = new ::member<V>(target, member);
 	}
 	
 	template <typename T, typename Getter, typename Setter>

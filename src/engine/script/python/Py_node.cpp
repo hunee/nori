@@ -67,7 +67,7 @@ Py_node_traverse(Py_node_object *self, visitproc visit, void *arg)
 static int
 Py_node_clear(Py_node_object *self)
 {
-    //__function__
+    __py_function__
 
     Py_CLEAR(self->node_ptr);
     Py_CLEAR(self->owner);
@@ -78,7 +78,7 @@ Py_node_clear(Py_node_object *self)
 static void
 Py_node_dealloc(Py_node_object *self)
 {
-    //__function__
+    __py_function__
 
     PyObject_GC_UnTrack(self);
     Py_node_clear(self);
@@ -94,7 +94,7 @@ Py_node_dealloc(Py_node_object *self)
 static PyObject *
 Py_node_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
-    //__function__
+    __py_function__
 
     Py_node_object *self;
     self = (Py_node_object *) type->tp_alloc(type, 0);
@@ -130,7 +130,7 @@ Py_node_init(Py_node_object *self, PyObject *args, PyObject *kwds)
     COUT << "- name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ", ref_count: " << Py_REFCNT(self) << ENDL;
 }*/
 
-    static const char *kwlist[] = {"name", "parent", NULL};
+    static const char *kwlist[] = {"name", "owner", NULL};
     const char* name = nullptr;
 
     PyObject *object = NULL, *tmp;
@@ -147,9 +147,9 @@ Py_node_init(Py_node_object *self, PyObject *args, PyObject *kwds)
 
     if (object) {
 {        
-        auto no = (Py_node_object*) object;
+        auto no = reinterpret_cast<Py_node_object*> (object);
         auto node_ptr = Py_get<GL::dummy_node>(no->node_ptr);
-        COUT << "object name: " << node_ptr->name_ << ", ref_count: " << Py_REFCNT(object) << ENDL;
+        COUT << "owner name: " << node_ptr->name_ << ", ref_count: " << Py_REFCNT(object) << ENDL;
 }
 
         self->owner = PyWeakref_NewRef(object, NULL);
@@ -207,7 +207,7 @@ Py_node_setowner(Py_node_object *self, PyObject *value, void *closure)
 static PyObject *
 Py_node_getname(Py_node_object *self, void *closure)
 {
-    __function__
+    __py_function__
 
     Py_INCREF(self->name);
     return self->name;
@@ -216,7 +216,7 @@ Py_node_getname(Py_node_object *self, void *closure)
 static int
 Py_node_setname(Py_node_object *self, PyObject *value, void *closure)
 {
-    __function__
+    __py_function__
 
     if (value == NULL) {
         PyErr_SetString(PyExc_TypeError, "Cannot delete the first attribute");
@@ -282,12 +282,12 @@ Py_node_dump(Py_node_object *self, PyObject *Py_UNUSED(ignored))
 
 void Py_node_add_object(PyObject *self, PyObject *object)
 {
-    //__function__
+    __py_function__
 
     ///
     auto node = reinterpret_cast<Py_node_object*> (object);
-    auto node_ptr = Py_get<GL::dummy_node>(node->node_ptr);
-    //COUT << "object name: " << node_ptr->name_ << "type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ENDL;
+    auto node_ptr = Py_get<GL::node_>(node->node_ptr);
+    COUT << "object name: " << node_ptr->name_ << ", type: " << (node_ptr ? __typeid_name(*node_ptr):"nullptr") << ENDL;
 
     ///
     auto self_node = reinterpret_cast<Py_node_object*> (self);
@@ -305,7 +305,8 @@ void Py_node_add_object(PyObject *self, PyObject *object)
 static PyObject *
 Py_node_add(PyObject *self, PyObject *args, PyObject *keywds)
 {
-/*    __function__
+    __py_function__
+/*
 {
     auto so = reinterpret_cast<Py_node_object*> (self);
     auto node_ptr = Py_get<GL::dummy_node>(so->node_ptr);
@@ -338,7 +339,7 @@ Py_node_add(PyObject *self, PyObject *args, PyObject *keywds)
 
 void Py_node_erase_object(PyObject *self, PyObject *object)
 {
-    //__function__
+    __py_function__
 
     ///
     auto node = reinterpret_cast<Py_node_object*> (object);
@@ -356,8 +357,8 @@ void Py_node_erase_object(PyObject *self, PyObject *object)
 static PyObject *
 Py_node_erase(PyObject *self, PyObject *args, PyObject *keywds)
 {
-/*    __function__
-
+    __py_function__
+/*
 {
     auto so = reinterpret_cast<Py_node_object*> (self);
     auto node_ptr = Py_get<GL::dummy_node>(so->node_ptr);
@@ -426,7 +427,7 @@ PyTypeObject Py_node_type = {
 static PyObject *
 keywdarg_parrot(PyObject *self, PyObject *args, PyObject *keywds)
 {
-    __function__
+    __py_function__
 
     int voltage;
     const char *state = "a stiff";
