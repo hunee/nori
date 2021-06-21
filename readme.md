@@ -22,8 +22,13 @@ vi foo.cpp
 
 <img src="Resources/a0e32dc5c27bc87a40e04578d4db2a70.jpg" width="40%" height="30%" title="%(비율) 크기 설정" alt="RubberDuck"></img>
 
-deps
->##### GLFW
+# Submodules
+- https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+<br>
+
+>#### ./deps
+>>##### GLFW
 ```bash
 $ git submodule add https://github.com/glfw/glfw deps/glfw
 
@@ -31,7 +36,7 @@ $ cmake .
 $ make
 ```
 
->##### jsoncpp
+>>##### jsoncpp
 ```bash
 $ git submodule add https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
 
@@ -42,8 +47,9 @@ $ make
 git status
 
 $ git submodule init
-Submodule 'DbConnector' (https://github.com/chaconinc/DbConnector) registered for path 'DbConnector'
 $ git submodule update
+
+$ git submodule update --init --recursive
 
 $ git clone --recurse-submodules https://github.com/chaconinc/MainProject
 
