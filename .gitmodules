@@ -1,9 +1,6 @@
 [submodule "glfw"]
-	path = glfw
-	url = https://github.com/glfw/glfw
-[submodule "deps/glfw"]
 	path = deps/glfw
 	url = https://github.com/glfw/glfw
-[submodule "deps/jsoncpp"]
+[submodule "jsoncpp"]
 	path = deps/jsoncpp
 	url = https://github.com/open-source-parsers/jsoncpp
