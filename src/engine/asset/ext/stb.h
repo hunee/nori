@@ -4,6 +4,8 @@
 
 #include "renderer/GL/GL_texture.h"
 
+#ifdef USE_STB
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 
@@ -72,3 +74,5 @@ public:
 };
 
 }; //ext
+
+#endif //USE_STB

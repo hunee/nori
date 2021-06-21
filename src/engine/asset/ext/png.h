@@ -4,9 +4,7 @@
 
 #include "renderer/GL/GL_texture.h"
 
-#define USE_LIBPNG
-
-#ifdef USE_LIBPNG
+#ifndef USE_STB
 
 #include <png.h>
 
@@ -199,4 +197,4 @@ public:
 
 }; //ext
 
-#endif //USE_LIBPNG
+#endif //USE_STB

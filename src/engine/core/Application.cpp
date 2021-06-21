@@ -336,20 +336,9 @@ int Application::init_asset_manager()
     auto importer = asset_importer::get();
 
     {
+#ifdef USE_STB        
     auto stb = std::make_shared<asset_ext<ext::stb>>();
     (*importer)["jpg"] = stb;
-
-#ifdef USE_LIBPNG    
-    (*importer)["png"] = std::make_shared<asset_ext<ext::png>>();
-#else
-    (*importer)["png"] = stb;
-#endif
-
-#ifdef USE_TARGA
-    (*importer)["tga"] = std::make_shared<asset_ext<ext::targa>>();
-#else
-    (*importer)["tga"] = stb;
-#endif
 
     (*importer)["bmp"] = stb;
     (*importer)["psd"] = stb;
@@ -358,6 +347,14 @@ int Application::init_asset_manager()
     (*importer)["hdr"] = stb;
     (*importer)["pic"] = stb;
     (*importer)["pnm"] = stb;
+
+    (*importer)["png"] = stb;
+    (*importer)["tga"] = stb;
+
+#else
+    (*importer)["png"] = std::make_shared<asset_ext<ext::png>>();
+    (*importer)["tga"] = std::make_shared<asset_ext<ext::targa>>();
+#endif
 
     (*importer)["ttf"] = std::make_shared<asset_ext<ext::ftf>>();
     (*importer)["bmf"] = std::make_shared<asset_ext<ext::bmf>>();

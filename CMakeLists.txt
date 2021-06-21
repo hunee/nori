@@ -128,8 +128,11 @@ if(MSVC)
 elseif(${CMAKE_CXX_COMPILER_ID} MATCHES AppleClang)
     #message(STATUS "AppleClang")
     
-    #set(CMAKE_CXX_FLAGS "-std=c++2a -DGLEW")
-    set(CMAKE_CXX_FLAGS "-std=c++2a")
+    #USE_STB or USE_FT2
+    #USE_GLEW or USE_GLAD
+
+    # -DUSE_GLFW
+    set(CMAKE_CXX_FLAGS "-std=c++2a -DUSE_GLFW")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0 -g -DDEBUG") 
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2") 
     set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS} -Os") 

@@ -4,9 +4,7 @@
 
 #include "renderer/GL/GL_texture.h"
 
-#define USE_TARGA
-
-#ifdef USE_TARGA
+#ifndef USE_STB
 
 #include "targa/targa.h"
 
@@ -80,4 +78,4 @@ public:
 
 }; //ext
 
-#endif //USE_TARGA
+#endif //USE_STB
