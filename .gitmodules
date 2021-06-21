@@ -10,3 +10,9 @@
 [submodule "lua"]
 	path = deps/lua
 	url = https://github.com/lua/lua
+[submodule "stb"]
+	path = deps/stb
+	url = https://github.com/nothings/stb
+[submodule "tinyxml2"]
+	path = deps/tinyxml2
+	url = https://github.com/leethomason/tinyxml2

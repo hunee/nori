@@ -24,8 +24,8 @@ vi foo.cpp
 
 
 # SUB MODULES
-- ## ./deps
-  - [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+- ### ./deps
+  - #### [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 ```bash
 $ git submodule --help
     add [-b <branch>] [-f|--force] [--name <name>] [--reference <repository>] [--depth <depth>] [--] <repository> [<path>]
@@ -34,7 +34,9 @@ $ git submodule --help
 $ git submodule add [--name <name>] <repository> [<path>]
 ```
 
-- ### [GLFW]()
+<br>
+
+- #### [GLFW]()
   
 ```bash
 $ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
@@ -43,7 +45,7 @@ $ cmake .
 $ make
 ```
 
-- ### [jsoncpp]()
+- #### [jsoncpp]()
 ```bash
 $ git submodule add --name jsoncpp https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
 
@@ -51,11 +53,19 @@ $ mkdir jsoncpp-build; cd jsoncpp-build; cmake ../
 $ make
 ```
 
-<br>
-
 - ### [stb]()
-- https://github.com/nothings/stb
+```bash
+$ git submodule add --name stb https://github.com/nothings/stb deps/stb
 
+```
+
+- ### [tinyxml2](http://www.grinninglizard.com/tinyxml2/)
+
+```bash
+$ git submodule add --name tinyxml2 https://github.com/leethomason/tinyxml2 deps/tinyxml2
+
+
+```
 
 - ### [freetype]()
 ```bash

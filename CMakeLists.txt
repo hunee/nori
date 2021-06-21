@@ -167,6 +167,7 @@ set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
 #include(CheckIncludeFile)
 
 # https://github.com/nothings/stb
+# https://github.com/leethomason/tinyxml2
 
 #
 # GLEW
