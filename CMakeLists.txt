@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.11)
 project(nori VERSION 0.1.0)
 
 #
+message(STATUS "CMAKE_VERSION: ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}.${CMAKE_TWEAK_VERSION}")
 message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+
+
 
 #
 # include_directories
@@ -125,7 +128,8 @@ if(MSVC)
 elseif(${CMAKE_CXX_COMPILER_ID} MATCHES AppleClang)
     #message(STATUS "AppleClang")
     
-    set(CMAKE_CXX_FLAGS "-std=c++2a -DGLEW")
+    #set(CMAKE_CXX_FLAGS "-std=c++2a -DGLEW")
+    set(CMAKE_CXX_FLAGS "-std=c++2a")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0 -g -DDEBUG") 
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2") 
     set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS} -Os") 
@@ -166,61 +170,20 @@ set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
 
 #include(CheckIncludeFile)
 
-# https://github.com/nothings/stb
-# https://github.com/leethomason/tinyxml2
-
-#
-# GLEW
-# https://github.com/nigels-com/glew
-#
-# make extensions
-# make
-# make install
-
-set(GLEW_NAME glew)
-find_path(
-    GLEW_DIRS 
-    NAMES ${GLEW_NAME}
-    HINTS ${DEPS_DIRS}
-    NO_DEFAULT_PATH
-)
-
-if (GLEW_DIRS)
-    set(GLEW_DIRS ${GLEW_DIRS}/${GLEW_NAME})
-    
-    set(GLEW_INCLUDE_DIRS ${GLEW_DIRS}/include)
-    set(GLEW_LIBRARY_DIRS ${GLEW_DIRS}/lib)
-
-    message(STATUS "GLEW_DIRS: ${GLEW_DIRS}")
-
-    message(STATUS "GLEW_INCLUDE_DIRS: ${GLEW_INCLUDE_DIRS}")
-    message(STATUS "GLEW_LIBRARY_DIRS: ${GLEW_LIBRARY_DIRS}")    
-
-    find_library(
-        GLEW_LIBRARIES
-        NAMES libGLEW.a
-        HINTS ${GLEW_LIBRARY_DIRS}
-        REQUIRED
-        NO_DEFAULT_PATH
-    )
-
-    if(GLEW_LIBRARIES)
-        message(STATUS "GLEW_LIBRARIES: ${GLEW_LIBRARIES}")        
-
-        include_directories(${GLEW_INCLUDE_DIRS})
-
-        link_directories(${GLEW_LIBRARY_DIRS})
-        target_link_libraries(${PROJECT_NAME} ${GLEW_LIBRARIES})    
-    endif() #GLEW_LIBRARIES
-endif() #GLEW_DIRS
+# git submodule add --name stb https://github.com/nothings/stb stb
+# git submodule add --name tinyxml2 https://github.com/leethomason/tinyxml2 tinyxml2
 
 
 #
 # GLFW
-# https://github.com/glfw/glfw
 #
-# cmake .
-# make
+#[[
+```bash
+$ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
+
+$ mkdir build; cd build; cmake ../; make
+```
+]]
 
 set(GLFW_NAME glfw)
 find_path(
@@ -235,7 +198,7 @@ if (GLFW_DIRS)
     
     set(GLFW_INCLUDE_DIRS ${GLFW_DIRS}/include)
     set(GLFW_DEPS_DIRS ${GLFW_DIRS}/deps)
-    set(GLFW_LIBRARY_DIRS ${GLFW_DIRS}/src)
+    set(GLFW_LIBRARY_DIRS ${GLFW_DIRS}/build/src)
 
     message(STATUS "GLFW_DIRS: ${GLFW_DIRS}")
 
@@ -265,11 +228,14 @@ endif() #GLFW_DIRS
 
 #
 # jsoncpp
-# https://github.com/open-source-parsers/jsoncpp
-#
-# mkdir jsoncpp-build; cd jsoncpp-build; cmake ../
-# make
-# make install
+# 
+#[[
+```bash
+$ git submodule add --name jsoncpp https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
+
+$ mkdir build; cd build; cmake ../; make
+```
+]]
 
 set(JSONCPP_NAME jsoncpp)
 find_path(
@@ -283,7 +249,7 @@ if (JSONCPP_DIRS)
     set(JSONCPP_DIRS ${JSONCPP_DIRS}/${JSONCPP_NAME})
     
     set(JSONCPP_INCLUDE_DIRS ${JSONCPP_DIRS}/include)
-    set(JSONCPP_LIBRARY_DIRS ${JSONCPP_DIRS}/jsoncpp-build/lib)
+    set(JSONCPP_LIBRARY_DIRS ${JSONCPP_DIRS}/build/lib)
 
     message(STATUS "JSONCPP_DIRS: ${JSONCPP_DIRS}")
 
@@ -292,7 +258,7 @@ if (JSONCPP_DIRS)
 
     find_library(
         JSONCPP_LIBRARIES
-        NAMES libjsoncpp_static.a
+        NAMES libjsoncpp.a
         HINTS ${JSONCPP_LIBRARY_DIRS}
         REQUIRED
         NO_DEFAULT_PATH
@@ -311,10 +277,13 @@ endif() #JSONCPP_DIRS
 
 #
 # freetype
-# https://github.com/freetype/freetype
 #
-# mkdir build; cd build; 
-# cmake ../; make
+#[[
+```bash
+$ git submodule add --name freetype https://github.com/freetype/freetype deps/freetype
+$ mkdir build; cd build; cmake ../; make
+```
+]]
 
 set(FREETYPE_NAME freetype)
 find_path(
@@ -357,11 +326,14 @@ endif() #FREETYPE_DIRS
 
 #
 # libpng
-# http://www.libpng.org/pub/png/libpng.html
 #
-# mkdir build; cd build; cmake ../
-# make
-# make install
+#[[
+```bash
+$ curl -O https://nchc.dl.sourceforge.net/project/libpng/libpng16/1.6.37/libpng-1.6.37.tar.xz
+$ mkdir build; cd build; cmake ../; make
+```
+]]
+
 #[[
 set(LIBPNG_NAME libpng-1.6.37)
 find_path(
@@ -418,11 +390,14 @@ endif ()
 
 #
 # zlib
-# https://zlib.net
 #
-# mkdir build; cd build; cmake ../
-# make
-# make install
+#[[
+```bash
+$ curl -O https://nchc.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.xz
+$ mkdir build; cd build; cmake ../; make
+```
+]]
+
 #[[
 set(ZLIB_NAME zlib-1.2.11)
 find_path(
@@ -478,11 +453,16 @@ endif ()
 
 #
 # BZip2
-# https://www.sourceware.org/bzip2/
 #
+#[[
+```bash
+$ git submodule add --name bzip2 git://sourceware.org/git/bzip2.git deps/bzip2
+# or 
+$ curl -O https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz
+
 # mkdir build; cd build; cmake ../
-# make
-# make install
+```
+]]
 
 find_package(BZip2 REQUIRED)
 if (BZIP2_FOUND)
@@ -501,6 +481,12 @@ endif ()
 #
 # fbxsdk
 # https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2
+#
+#[[
+```bash
+$ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_clang_mac.pkg.tgz
+```bash
+]]
 
 set(FBXSDK_NAME fbxsdk-2020.0.1)
 find_path(
@@ -542,9 +528,14 @@ endif() #FBXSDK_DIRS
 
 #
 # lua
-# https://github.com/lua/lua
 #
-# make a
+#[[
+```bash
+$ git submodule add --name lua https://github.com/lua/lua deps/lua
+
+$ make a
+```
+]]
 
 #set(LUA_NAME lua-5.4.1)
 set(LUA_NAME lua)
@@ -660,6 +651,57 @@ if(Boost_FOUND)
 
 endif()
 ]]
+
+
+#
+# GLEW
+#
+#[[
+```bash
+$ git submodule add --name glew https://github.com/nigels-com/glew deps/glew
+
+$ make extensions
+$ make
+```
+]]
+
+set(GLEW_NAME glew)
+find_path(
+    GLEW_DIRS 
+    NAMES ${GLEW_NAME}
+    HINTS ${DEPS_DIRS}
+    NO_DEFAULT_PATH
+)
+
+if (GLEW_DIRS)
+    set(GLEW_DIRS ${GLEW_DIRS}/${GLEW_NAME})
+    
+    set(GLEW_INCLUDE_DIRS ${GLEW_DIRS}/include)
+    set(GLEW_LIBRARY_DIRS ${GLEW_DIRS}/lib)
+
+    message(STATUS "GLEW_DIRS: ${GLEW_DIRS}")
+
+    message(STATUS "GLEW_INCLUDE_DIRS: ${GLEW_INCLUDE_DIRS}")
+    message(STATUS "GLEW_LIBRARY_DIRS: ${GLEW_LIBRARY_DIRS}")    
+
+    find_library(
+        GLEW_LIBRARIES
+        NAMES libGLEW.a
+        HINTS ${GLEW_LIBRARY_DIRS}
+        REQUIRED
+        NO_DEFAULT_PATH
+    )
+
+    if(GLEW_LIBRARIES)
+        message(STATUS "GLEW_LIBRARIES: ${GLEW_LIBRARIES}")        
+
+        include_directories(${GLEW_INCLUDE_DIRS})
+
+        link_directories(${GLEW_LIBRARY_DIRS})
+        target_link_libraries(${PROJECT_NAME} ${GLEW_LIBRARIES})    
+    endif() #GLEW_LIBRARIES
+endif() #GLEW_DIRS
+
 
 
 #

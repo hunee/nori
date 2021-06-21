@@ -33,12 +33,11 @@ void check_GLextensions()
 {
 	//__function__
 
-#ifdef __GL_EXT_GLEW
+#ifdef USE_GLEW
   if (glewInit() != GLEW_OK)
     return;
-#endif
 
-#ifdef __GL_EXT_GLAD
+#else
 	if (!gladLoadGL(glfwGetProcAddress))
 		return;
 #endif

@@ -2,18 +2,11 @@
 
 #pragma once
 
-//#ifndef __GL_EXT_GLEW
-//#define __GL_EXT_GLAD
-#ifndef __GL_EXT_GLAD
-#define __GL_EXT_GLEW
-#endif
-
 ////
-#ifdef __GL_EXT_GLEW
+#ifdef USE_GLEW
   #include <GL/glew.h>
-#endif
 
-#ifdef __GL_EXT_GLAD
+#else
 	#include <glad/gl.h>
 #endif
 

@@ -24,8 +24,8 @@ vi foo.cpp
 
 
 # SUB MODULES
-- ### ./deps
-  - #### [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+> - ### ./deps
+>> - ##### [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 ```bash
 $ git submodule --help
     add [-b <branch>] [-f|--force] [--name <name>] [--reference <repository>] [--depth <depth>] [--] <repository> [<path>]
@@ -36,76 +36,48 @@ $ git submodule add [--name <name>] <repository> [<path>]
 
 <br>
 
-- #### [GLFW]()
+>> - #### [GLFW]()
   
 ```bash
 $ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
-
-$ cmake .
-$ make
+$ mkdir build; cd build; cmake ../; make
 ```
 
-- #### [jsoncpp]()
+
+>> - #### [jsoncpp]()
 ```bash
 $ git submodule add --name jsoncpp https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
-
-$ mkdir jsoncpp-build; cd jsoncpp-build; cmake ../
-$ make
+$ mkdir build; cd build; cmake ../; make
 ```
 
-- ### [stb]()
-```bash
-$ git submodule add --name stb https://github.com/nothings/stb deps/stb
-
-```
-
-- ### [tinyxml2](http://www.grinninglizard.com/tinyxml2/)
-
-```bash
-$ git submodule add --name tinyxml2 https://github.com/leethomason/tinyxml2 deps/tinyxml2
-
-
-```
-
-- ### [freetype]()
+>> - #### [freetype]()
 ```bash
 $ git submodule add --name freetype https://github.com/freetype/freetype deps/freetype
-
-$ mkdir build; cd build; 
-$ cmake ../; make
+$ mkdir build; cd build; cmake ../; make
 ```
 
-<br>
-
-  - #### [libpng](http://www.libpng.org/pub/png/libpng.html)
-  - ###### - https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/
-
-<br>
+>>> - #### [libpng](http://www.libpng.org/pub/png/libpng.html)
+>>>> - ##### https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/
 
 ```bash
 $ curl -O https://nchc.dl.sourceforge.net/project/libpng/libpng16/1.6.37/libpng-1.6.37.tar.xz
-$ mkdir build; cd build; cmake ../
-$ make
+$ mkdir build; cd build; cmake ../; make
 ```
 
-<br>
-
-- #### [zlib](https://zlib.net)
-- ###### - https://sourceforge.net/projects/libpng/files/zlib/1.2.11/
+>>> - #### [zlib](https://zlib.net)
+>>>> - ###### https://sourceforge.net/projects/libpng/files/zlib/1.2.11/
 
 ```bash
 $ curl -O https://nchc.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.xz
-$ mkdir build; cd build; cmake ../
-$ make
+$ mkdir build; cd build; cmake ../; make
 ```
 
-<br>
-
-- #### [BZip2](https://www.sourceware.org/bzip2/)
-- ##### - https://www.sourceware.org/bzip2/downloads.html
+>>> - #### [BZip2](https://www.sourceware.org/bzip2/)
+>>>> - ##### https://www.sourceware.org/bzip2/downloads.html
 
 ```bash
 $ git submodule add --name bzip2 git://sourceware.org/git/bzip2.git deps/bzip2
+# or 
 $ curl -O https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz
 
 # mkdir build; cd build; cmake ../
@@ -113,11 +85,7 @@ $ curl -O https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz
 # make install
 ```
 
-<br>
-
-- ## OPTIONS
-
-  - [lua]()
+>> - #### [lua]()
 ```bash
 $ git submodule add --name lua https://github.com/lua/lua deps/lua
 
@@ -125,10 +93,26 @@ $ make a
 ```
 
 
+>> - #### [stb]()
+```bash
+$ git submodule add --name stb https://github.com/nothings/stb deps/stb
+
+```
+
+>> - #### [tinyxml2](http://www.grinninglizard.com/tinyxml2/)
+
+```bash
+$ git submodule add --name tinyxml2 https://github.com/leethomason/tinyxml2 deps/tinyxml2
+
+```
+
+
 
 <br>
 
-- #### GLEW
+- ## OPTIONS
+
+>> - #### [GLEW]()
 ```bash
 $ git submodule add --name glew https://github.com/nigels-com/glew deps/glew
 
@@ -136,22 +120,15 @@ $ make extensions
 $ make
 ```
 
-
-- ## Autodesk FBX SDK
-- #### [fbxsdk](https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2)
-
+>> - #### [Autodesk FBX SDK](https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2)
 ```bash
 
 # Windows
-
 $ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_vs2019_win.exe
 
 # Mac
 $ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_clang_mac.pkg.tgz
 
-
-# Linux
-$ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_linux.tar.gz
 
 ```
 
