@@ -34,9 +34,7 @@ $ git submodule --help
 $ git submodule add [--name <name>] <repository> [<path>]
 ```
 
-<br>
-
-  - [GLFW]()
+- ### [GLFW]()
   
 ```bash
 $ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
@@ -44,8 +42,6 @@ $ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
 $ cmake .
 $ make
 ```
-
-<br>
 
 - ### [jsoncpp]()
 ```bash
