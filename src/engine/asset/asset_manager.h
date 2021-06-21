@@ -137,82 +137,84 @@ void init()
 {
   //__method__
 
-    ///compiler
-    COUT << "- cc: " << __CC__ << " (" << __CC_MAJOR__ << "." << __CC_MINOR__ << "." << __CC_PATCHLEVEL__ << ")" << ENDL;
-    COUT << "- os: " << getosversion() << ENDL;
+	///compiler
+	COUT << "- CC: " << __CC__ << " (" << __CC_MAJOR__ << "." << __CC_MINOR__ << "." << __CC_PATCHLEVEL__ << ")" << ENDL;
+	COUT << "- OS: " << getosversion() << ENDL;
+
+	char path[PATH_MAX];
 
 
-    /// 1
-    char path[PATH_MAX];
-        
-#if defined (_WIN32)
-    ::GetCurrentDirectory(PATH_MAX, path);
-    //::GetModuleFileName(NULL, path, MAX_PATH);
-    
-    //    char* slash = strchrl(path, '\\');
-    //    *slash = '\0';
-    
-#elif defined (__APPLE__)
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef resourcesURL = CFBundleCopyBundleURL(mainBundle);
-    CFStringRef str = CFURLCopyFileSystemPath(resourcesURL, kCFURLPOSIXPathStyle);
-    CFRelease(resourcesURL);
-    
-    CFStringGetCString(str, path, FILENAME_MAX, kCFStringEncodingASCII);
-    CFRelease(str);
-    
-    ///printf("CPP>> %s\n", path);
-#else
-    getcwd(path, PATH_MAX);
-    
-#endif //_WIN32
-    
-    strcpy(path_, path);
-    strcpy(data_path_, path);
-    strcpy(persistent_data_path_, path);
-    strcpy(temporary_cache_path_, path);
+/// 1		    
+#if defined (__APPLE__)
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	CFURLRef resourcesURL = CFBundleCopyBundleURL(mainBundle);
+	CFStringRef str = CFURLCopyFileSystemPath(resourcesURL, kCFURLPOSIXPathStyle);
+	CFRelease(resourcesURL);
 
+	CFStringGetCString(str, path, FILENAME_MAX, kCFStringEncodingASCII);
+	CFRelease(str);
+
+	///printf("CPP>> %s\n", path);
+
+#elif defined (_WIN32)
+	::GetCurrentDirectory(PATH_MAX, path);
+	//::GetModuleFileName(NULL, path, MAX_PATH);
+
+	//    char* slash = strchrl(path, '\\');
+	//    *slash = '\0';
     
-    /// 2
-#if defined (_WIN32)
-    strcat(path_, "\\");
-    strcat(path_, "\\Resources\\");
-    strcat(path_, "\\");
+#else //_WIN32
+	getcwd(path, PATH_MAX);
     
-#elif defined (__APPLE__)
+#endif //__APPLE__
     
-    // iphone
+
+	strcpy(path_, path);
+	strcpy(data_path_, path);
+	strcpy(persistent_data_path_, path);
+	strcpy(temporary_cache_path_, path);
+
+
+/// 2    
+#if defined (__APPLE__)
+    
+// IPHONE
 #if defined (__IPHONE_OS_VERSION_MAX_ALLOWED)
-    strcat(path_, "/");
-    strcat(path_, "/");
+	strcat(path_, "/");
+	strcat(path_, "/");
     
 #if defined (TARGET_OS_IPHONE)
-    strcat(persistent_data_path_, "/../Documents/");
+	strcat(persistent_data_path_, "/../Documents/");
     
 #elif defined (TARGET_IPHONE_SIMULATOR)
-    strcat(persistent_data_path_, "/");
-#endif
+	strcat(persistent_data_path_, "/");
+#endif //__IPHONE_OS_VERSION_MAX_ALLOWED
     
-    // mac
+// MAC
 #elif defined (__MAC_OS_X_VERSION_MAX_ALLOWED)
-    strcat(path_, "/Contents/MacOS/");
-    strcat(data_path_, "/Contents/Resources/");
-    strcat(persistent_data_path_, "/Contents/MacOS/");
+	strcat(path_, "/Contents/MacOS/");
+	strcat(data_path_, "/Contents/Resources/");
+	strcat(persistent_data_path_, "/Contents/MacOS/");
 
-    //strcat(path_, "/");
-    //strcat(data_path_, "/Resources/");
-    //strcat(_persistentDataPath, "/");
+	//strcat(path_, "/");
+	//strcat(data_path_, "/Resources/");
+	//strcat(_persistentDataPath, "/");
 
-#endif
+#endif //__MAC_OS_X_VERSION_MAX_ALLOWED
     
-    strcat(temporary_cache_path_, "/Contents/MacOS/");
-    ///strcat(temporary_cache_path_, "/Cache");
+	strcat(temporary_cache_path_, "/Contents/MacOS/");
+	///strcat(temporary_cache_path_, "/Cache");
     
-#else
-    strcat(path_, "/");
-    strcat(path_, "/Resources/");
-    strcat(path_, "/");
-#endif //_WIN32
+#elif defined (_WIN32)
+	strcat(path_, "\\");
+	strcat(path_, "\\Resources\\");
+	strcat(path_, "\\");
+
+#else //_WIN32
+	strcat(path_, "/");
+	strcat(path_, "/Resources/");
+	strcat(path_, "/");
+#endif //__APPLE__
 
   COUT << "- path: " << KYEL << KUNDL << path_ << ENDL;
   COUT << "- data_path: " << KYEL << KUNDL << data_path_ << ENDL;

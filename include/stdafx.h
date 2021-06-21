@@ -301,7 +301,7 @@ int main()
 
 
 #define NS_BEGAN(ns) namespace ns {
-#define NS_END(AL_ext) }
+#define NS_END(ns) }
 
 
 /**

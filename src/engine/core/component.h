@@ -2,8 +2,8 @@
 
 #pragma once
 
-namespace GL {
 
+NS_BEGAN(GL)
 
 /**
  * @brief 
@@ -57,7 +57,9 @@ public:
  * 
  */
 template <typename T>
-class component : public component_, public T {
+class component
+: public component_
+, public T {
 public:
 	component(const std::string& name)
 	: component_(name) {}
@@ -69,4 +71,4 @@ public:
 	}
 };
 
-};//GL
+NS_END(GL)

@@ -1,17 +1,34 @@
-# nori
 
+# Nori for c/c++
 
-```C++
+#### - for 
+```bash
+- Apple
+- Win32/64
+- Linux
+
+- Android
+- iOS
+
+- ...
+```
+
+```c++
 vi foo.h
 
 /* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
 #pragma once
+```
 
+<br>
+
+```c++
 vi foo.cpp
 
 /* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*- */
 
+#include "stdafx.h"
 ```
 
 
@@ -21,6 +38,54 @@ vi foo.cpp
 <br>
 
 <img src="Resources/a0e32dc5c27bc87a40e04578d4db2a70.jpg" width="40%" height="30%" title="%(비율) 크기 설정" alt="RubberDuck"></img>
+
+
+<br>
+
+- #### PLATFORM=???
+
+<br>
+
+```c++
+#if defined (__APPLE__)
+    #if defined (__IPHONE_OS_VERSION_MAX_ALLOWED)
+        #if defined (TARGET_OS_IPHONE)
+        #endif //TARGET_OS_IPHONE
+
+        #if defined (TARGET_IPHONE_SIMULATOR)
+        #endif //TARGET_IPHONE_SIMULATOR
+    #endif // __IPHONE_OS_VERSION_MAX_ALLOWED
+
+    #if defined (__MAC_OS_X_VERSION_MAX_ALLOWED)
+    #endif // __IPHONE_OS_VERSION_MAX_ALLOWED
+#endif // __APPLE__
+
+#if defined (_WIN32)
+#endif // _WIN32
+
+#if defined (_LINUX)
+#endif // _LINUX
+
+#if defined (ANDROID)
+#endif // ANDROID
+
+```
+
+<br>
+
+- #### CC=???
+ 
+```c++
+#define __CC__ = STR
+
+#define __CC_VER__ = ???
+
+#define __CC_MAJOR__ = ???
+#define __CC_MINOR__ = ???
+#define __CC_PATCHLEVEL__ = ???
+```
+
+<br>
 
 
 # SUB MODULES
@@ -49,9 +114,9 @@ $ cat .gitmodules
 
 <br>
 
-- #### -DUSE_GLFW
-- #### [GLFW]()
-  
+#### [GLFW]()
+- ###### -DUSE_GLFW (default)
+   
 ```bash
 $ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
 $ mkdir build; cd build; cmake ../; make
@@ -59,29 +124,24 @@ $ mkdir build; cd build; cmake ../; make
 
 <br>
 
-- #### -DUSE_STB
-- #### [stb]()
-```bash
-$ git submodule add --name stb https://github.com/nothings/stb deps/stb
+#### [freetype]()
+- ##### ftf, png, tga, ...
+- ###### -DUSE_FT2 (default)
 
-```
-
-- #### -DUSE_FT2 
-- #### [freetype]()
 ```bash
 $ git submodule add --name freetype https://github.com/freetype/freetype deps/freetype
 $ mkdir build; cd build; cmake ../; make
 ```
 
-- #### [libpng](http://www.libpng.org/pub/png/libpng.html)
-- ##### https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/
+- ##### [libpng](http://www.libpng.org/pub/png/libpng.html)
+- ###### https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/
 
 ```bash
 $ curl -O https://nchc.dl.sourceforge.net/project/libpng/libpng16/1.6.37/libpng-1.6.37.tar.xz
 $ mkdir build; cd build; cmake ../; make
 ```
 
-- #### [zlib](https://zlib.net)
+- ##### [zlib](https://zlib.net)
 - ###### https://sourceforge.net/projects/libpng/files/zlib/1.2.11/
 
 ```bash
@@ -89,8 +149,8 @@ $ curl -O https://nchc.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11
 $ mkdir build; cd build; cmake ../; make
 ```
 
-- #### [BZip2](https://www.sourceware.org/bzip2/)
-- ##### https://www.sourceware.org/bzip2/downloads.html
+- ##### [bzip2](https://www.sourceware.org/bzip2/)
+- ###### https://www.sourceware.org/bzip2/downloads.html
 
 ```bash
 $ git submodule add --name bzip2 git://sourceware.org/git/bzip2.git deps/bzip2
@@ -104,30 +164,53 @@ $ curl -O https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz
 
 <br>
 
-- #### [lua]()
+### or
+
+#### [stb]()
+- ##### ftf, png, tga, ...
+- ###### -DUSE_STB
 ```bash
-$ git submodule add --name lua https://github.com/lua/lua deps/lua
-$ make a
+$ git submodule add --name stb https://github.com/nothings/stb deps/stb
+
 ```
 
-- #### [tinyxml2](http://www.grinninglizard.com/tinyxml2/)
+<br>
+
+#### XML
+- ##### [tinyxml2](http://www.grinninglizard.com/tinyxml2/)
 ```bash
 $ git submodule add --name tinyxml2 https://github.com/leethomason/tinyxml2 deps/tinyxml2
 ```
 
-- #### [jsoncpp]()
+<br>
+
+#### JSON
+- ##### [jsoncpp]()
 ```bash
 $ git submodule add --name jsoncpp https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
 $ mkdir build; cd build; cmake ../; make
 ```
 
+<br>
+
+#### SCRIPT
+- ##### [Lua]()
+```bash
+$ git submodule add --name lua https://github.com/lua/lua deps/lua
+$ make a
+```
+
+- ##### [Python]()
+```bash
+https://www.python.org/downloads/release/python-395/
+```
+
+https://github.com/pybind/pybind11
 
 <br>
 
-- ## OPTIONS
-
-- -DUSE_GLEW
-- #### [GLEW]()
+##### [GLEW]()
+- ###### -DUSE_GLEW
 ```bash
 $ git submodule add --name glew https://github.com/nigels-com/glew deps/glew
 
@@ -135,10 +218,12 @@ $ make extensions
 $ make
 ```
 
-- #### -DUSE_FBXSDK
-- #### [Autodesk FBX SDK](https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2)
-```bash
+<br>
 
+#### [Autodesk FBX SDK](https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2)
+- ###### -DUSE_FBXSDK
+
+```bash
 # Windows
 $ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_vs2019_win.exe
 

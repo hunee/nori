@@ -4,7 +4,8 @@
 
 #include "node.h"
 
-namespace GL {
+
+NS_BEGAN(GL)
 
 /**
  * @brief Construct a new object
@@ -161,4 +162,4 @@ public:
 };
 
 
-};//GL
+NS_END(GL)

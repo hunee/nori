@@ -4,7 +4,8 @@
 
 #include "component.h"
 
-namespace GL {
+
+NS_BEGAN(GL)
 
 
 /**
@@ -103,7 +104,9 @@ public:
  * 
  */
 template <typename T>
-class node : public node_, public T {
+class node 
+: public node_
+, public T {
 
 public:
 	~node()
@@ -200,4 +203,4 @@ public:
 
 using dummy_node = node<dummy>;
 
-};//GL
+NS_END(GL)
