@@ -4,3 +4,9 @@
 [submodule "jsoncpp"]
 	path = deps/jsoncpp
 	url = https://github.com/open-source-parsers/jsoncpp
+[submodule "freetype"]
+	path = deps/freetype
+	url = https://github.com/freetype/freetype
+[submodule "lua"]
+	path = deps/lua
+	url = https://github.com/lua/lua

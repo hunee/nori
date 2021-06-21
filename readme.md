@@ -22,30 +22,136 @@ vi foo.cpp
 
 <img src="Resources/a0e32dc5c27bc87a40e04578d4db2a70.jpg" width="40%" height="30%" title="%(비율) 크기 설정" alt="RubberDuck"></img>
 
-# Submodules
-- https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+# SUB MODULES
+- ## ./deps
+  - [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+```bash
+$ git submodule --help
+    add [-b <branch>] [-f|--force] [--name <name>] [--reference <repository>] [--depth <depth>] [--] <repository> [<path>]
+    ...
+
+$ git submodule add [--name <name>] <repository> [<path>]
+```
 
 <br>
 
->#### ./deps
->>##### GLFW
+  - [GLFW]()
+  
 ```bash
-$ git submodule add https://github.com/glfw/glfw deps/glfw
+$ git submodule add --name glfw https://github.com/glfw/glfw deps/glfw
 
 $ cmake .
 $ make
 ```
 
->>##### jsoncpp
+<br>
+
+- ### [jsoncpp]()
 ```bash
-$ git submodule add https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
+$ git submodule add --name jsoncpp https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
 
 $ mkdir jsoncpp-build; cd jsoncpp-build; cmake ../
 $ make
 ```
 
-git status
+<br>
 
+- ### [stb]()
+- https://github.com/nothings/stb
+
+
+- ### [freetype]()
+```bash
+$ git submodule add --name freetype https://github.com/freetype/freetype deps/freetype
+
+$ mkdir build; cd build; 
+$ cmake ../; make
+```
+
+<br>
+
+  - #### [libpng](http://www.libpng.org/pub/png/libpng.html)
+  - ###### - https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/
+
+<br>
+
+```bash
+$ curl -O https://nchc.dl.sourceforge.net/project/libpng/libpng16/1.6.37/libpng-1.6.37.tar.xz
+$ mkdir build; cd build; cmake ../
+$ make
+```
+
+<br>
+
+- #### [zlib](https://zlib.net)
+- ###### - https://sourceforge.net/projects/libpng/files/zlib/1.2.11/
+
+```bash
+$ curl -O https://nchc.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.xz
+$ mkdir build; cd build; cmake ../
+$ make
+```
+
+<br>
+
+- #### [BZip2](https://www.sourceware.org/bzip2/)
+- ##### - https://www.sourceware.org/bzip2/downloads.html
+
+```bash
+$ git submodule add --name bzip2 git://sourceware.org/git/bzip2.git deps/bzip2
+$ curl -O https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz
+
+# mkdir build; cd build; cmake ../
+# make
+# make install
+```
+
+<br>
+
+- ## OPTIONS
+
+  - [lua]()
+```bash
+$ git submodule add --name lua https://github.com/lua/lua deps/lua
+
+$ make a
+```
+
+
+
+<br>
+
+- #### GLEW
+```bash
+$ git submodule add --name glew https://github.com/nigels-com/glew deps/glew
+
+$ make extensions
+$ make
+```
+
+
+- ## Autodesk FBX SDK
+- #### [fbxsdk](https://www.autodesk.com/developer-network/platform-technologies/fbx-sdk-2020-2)
+
+```bash
+
+# Windows
+
+$ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_vs2019_win.exe
+
+# Mac
+$ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_clang_mac.pkg.tgz
+
+
+# Linux
+$ curl -O https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-2/fbx20202_fbxsdk_linux.tar.gz
+
+```
+
+<br>
+
+```bash
 $ git submodule init
 $ git submodule update
 
@@ -53,6 +159,23 @@ $ git submodule update --init --recursive
 
 $ git clone --recurse-submodules https://github.com/chaconinc/MainProject
 
+$ git submodule add https://github.com/open-source-parsers/jsoncpp deps/jsoncpp
+
+git status
+
+
+$ cat .gitmodules
+
+[submodule "glfw"]
+	path = deps/glfw
+	url = https://github.com/glfw/glfw
+[submodule "jsoncpp"]
+	path = deps/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp
+
+...
+
+```
 
 # ????
 *single asterisks*
