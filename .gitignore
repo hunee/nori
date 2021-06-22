@@ -5,3 +5,4 @@ deps_
 *.png
 deps/libpng-1.6.37.tar.xz
 deps/zlib-1.2.11.tar.xz
+deps/libpng-1.6.37/

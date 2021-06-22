@@ -2,17 +2,19 @@
 
 #pragma once
 
+#include "math/math.h"
+
 namespace GL {
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 class texture : public GL::size, public __type_info<texture> {
 public:
 	virtual ~texture()
 	{
-		//__method__		
+		//__method__
 	}
 
 public:

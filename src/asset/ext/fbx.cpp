@@ -2,11 +2,11 @@
 
 #include "stdafx.h"
 
+#ifdef USE_FBXSDK
+
 #include "asset/asset_manager.h"
 
 #include "fbx.h"
-
-#ifdef USE_FBXSDK
 
 #include <iostream>
 

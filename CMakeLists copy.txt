@@ -3,7 +3,81 @@ project(nori VERSION 0.1.0)
 
 #
 message(STATUS "CMAKE_VERSION: ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}.${CMAKE_TWEAK_VERSION}")
-#message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
+
+
+
+#
+# include_directories
+#
+
+#
+include_directories(/usr/local/include)
+
+#
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps)
+
+#
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/engine)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/GL/glad)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/GL/os)
+
+
+
+
+#
+# deps src
+#
+set(DEPS_SRC_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
+
+set(DEPS_SRCS
+${DEPS_SRC_DIRS}/tinyxml2/tinyxml2.cpp
+${DEPS_SRC_DIRS}/targa/targa.c
+${DEPS_SRC_DIRS}/glfw/deps/glad_gl.c
+${DEPS_SRC_DIRS}/glfw/deps/glad_vulkan.c
+)
+
+
+
+#
+# src
+#
+set(SRC_DIR src)
+
+set(SRCS
+
+#osver
+${SRC_DIR}/engine/os/getosver_osx.mm
+
+#core
+${SRC_DIR}/engine/core/Application.cpp
+
+#ext
+${SRC_DIR}/engine/asset/ext/lua.cpp
+${SRC_DIR}/engine/asset/ext/fbx.cpp
+
+#gl
+${SRC_DIR}/engine/renderer/GL/GL_ext.cpp
+${SRC_DIR}/engine/renderer/GL/GL_state.cpp
+
+${SRC_DIR}/engine/ui/picker.cpp
+
+#python
+${SRC_DIR}/engine/script/python/Py_Application.cpp
+${SRC_DIR}/engine/script/python/Py_GL.cpp
+${SRC_DIR}/engine/script/python/Py_ext.cpp
+${SRC_DIR}/engine/script/python/Py_component.cpp
+${SRC_DIR}/engine/script/python/Py_node.cpp
+
+
+
+#src
+${SRC_DIR}/GLFW.cpp
+#${SRC_DIR}/main.cpp
+
+)
 
 
 # Icon
@@ -20,19 +94,16 @@ endif()
 #add_executable(boing WIN32 MACOSX_BUNDLE boing.c ${ICON} ${GLAD_GL})
 add_executable(${PROJECT_NAME}
   WIN32 MACOSX_BUNDLE
+  ${DEPS_SRCS}
+  ${SRCS}
   ${ICON}
 )
 
 
-# include_directories
-target_include_directories(${PROJECT_NAME} PRIVATE /usr/local/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-
 #
-add_subdirectory(deps)
-add_subdirectory(src)
-
+# target_sources
+#
+target_sources(${PROJECT_NAME} PRIVATE "${SRC_DIR}/main.cpp")
 
 
 #
@@ -80,18 +151,7 @@ else()
 endif()
 
 
-# CMAKE_CXX_FLAGS
-if (${CMAKE_BUILD_TYPE} MATCHES Debug)
-  message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS_DEBUG}")
-elseif (${CMAKE_BUILD_TYPE} MATCHES Release)
-  message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS_RELEASE}")
-elseif (${CMAKE_BUILD_TYPE} MATCHES MinSizeRel)
-  message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
-elseif (${CMAKE_BUILD_TYPE} MATCHES RelWithDebInfo)
-  message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
-else()
-  message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
-endif()
+message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 
 #
@@ -111,8 +171,10 @@ endif()
 
 
 #
-# Find dependencies
+# deps
 #
+set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
+
 
 include(CheckIncludeFile)
 
@@ -121,8 +183,11 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/builds/cmake)
 
 #message(STATUS "PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}")
 
+#add_subdirectory(tests)
 
-set(DEPS_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/deps)
+#
+# Find dependencies
+#
 
 # git submodule add --name stb https://github.com/nothings/stb stb
 # git submodule add --name tinyxml2 https://github.com/leethomason/tinyxml2 tinyxml2
@@ -140,8 +205,6 @@ if(GLFW_FOUND)
 
   link_directories(${GLFW_LIBRARY_DIRS})
   target_link_libraries(${PROJECT_NAME} ${GLFW_LIBRARIES})
-
-  target_sources(${PROJECT_NAME} PRIVATE ${GLFW_DEPS_DIRS}/glad_gl.c ${GLFW_DEPS_DIRS}/glad_vulkan.c)
 endif()
 
 
@@ -361,6 +424,7 @@ if (GLEW_FOUND)
   link_directories(${GLEW_LIBRARY_DIRS})
   target_link_libraries(${PROJECT_NAME} ${GLEW_LIBRARIES})
 endif ()
+
 
 
 

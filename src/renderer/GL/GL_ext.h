@@ -10,28 +10,29 @@
 	#include <glad/gl.h>
 #endif
 
+#include "math/math.h"
 
 /**
  *
  */
 enum {
 	FMT_UNKNOWN = 0,
-	
+
 	FMT_R8G8B8,
 	FMT_A8R8G8B8,
-	
+
 	FMT_R5G6B5,
 	FMT_A1R5G5B5,
 	FMT_A4R4G4B4,
-	
+
 	FMT_A8,
 	FMT_L8,
 	FMT_A8L8,
-	
+
 	FMT_DXT1,
 	FMT_DXT3,
 	FMT_DXT5,
-	
+
 	FMT_INDEX16 = 0,				// 16-bit index buffer bit depth.
 	FMT_INDEX32,					// 32-bit index buffer bit depth.
 	FMT_FORCE_DWORD = 0x7fffffff,	// force 32-bit size enum
@@ -91,7 +92,7 @@ static inline const char * glGetError_string(GLenum error)
 			break;
 		case GL_INVALID_OPERATION:
 			str = "GL_INVALID_OPERATION";
-			break;		
+			break;
 #if defined __gl_h_ || defined __gl3_h_
 		case GL_OUT_OF_MEMORY:
 			str = "GL_OUT_OF_MEMORY";

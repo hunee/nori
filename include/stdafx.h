@@ -3,12 +3,12 @@
 /**
  * @file stdafx.h
  * @author hunee (jhhunee@gmail.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2020-12-06
- * 
+ *
  * @copyright Copyright (c) 2020
- * 
+ *
  */
 
 #pragma once
@@ -157,7 +157,7 @@ void NEW_AAA(int aaa)
 		#if defined (TARGET_IPHONE_SIMULATOR)
 			#define __TARGET_SIMULATOR__
 		#endif
-	
+
 	// Mac
 	#elif defined (__MAC_OS_X_VERSION_MAX_ALLOWED)
         #define __TARGET_MACOS__
@@ -283,7 +283,7 @@ void NEW_AAA(int aaa)
 #include <iostream>
 #include <clocale>
 #include <cstdlib>
- 
+
 int main()
 {
     std::setlocale(LC_ALL, "en_US.utf8");
@@ -330,5 +330,3 @@ int main()
 
 #include "colors.h"
 #include "logger.h"
-
-#include "math/math.h"

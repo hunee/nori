@@ -4,12 +4,13 @@
 
 #include "node.h"
 
+#include "math/math.h"
 
 NS_BEGAN(GL)
 
 /**
  * @brief Construct a new object
- * 
+ *
  */
 class object
 : public std::map<const std::string, std::shared_ptr<component_>> {
@@ -28,7 +29,7 @@ public:
 	virtual void _began() {}
 	virtual void _end() {}
 
-public:	
+public:
 	virtual void _tick(double dt)
 	{
 		//owner
@@ -37,7 +38,7 @@ public:
 		if (owner)
 		{
 			auto o = std::dynamic_pointer_cast<object>(owner);
-			if (o) 
+			if (o)
 			{
 				auto t = o->transform();
 
@@ -53,10 +54,10 @@ public:
 		for (auto&& kv : *this)
 			kv.second->_tick(dt);
 	}
-	
+
 	virtual void _draw() {}
 
-public:	
+public:
 	void dump()
 	{
 		//__method__
@@ -68,7 +69,7 @@ public:
 public:
 	template <typename T=component_>
 	void add(const std::string& name, std::shared_ptr<T> component)
-//	void add(const std::string& name, std::shared_ptr<component_> component)	
+//	void add(const std::string& name, std::shared_ptr<component_> component)
 	{
 		//__method__
 
@@ -81,7 +82,7 @@ public:
 		}
 		catch (std::exception& e) {
 			COUT << "Exception: " << e.what() << ENDL;
-		}		
+		}
 	}
 
 	template <typename T>
@@ -123,7 +124,7 @@ public:
 		if (owner)
 			return std::dynamic_pointer_cast<T>(owner);
 
-		return nullptr;	
+		return nullptr;
 	}
 
 public:
@@ -133,29 +134,29 @@ public:
 
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 class owner_ptr {
 public:
 	virtual ~owner_ptr() {}
 
-public:	
+public:
 	template <typename T>
 	std::shared_ptr<T> owner()
 	{
 		//__method__
-		
+
 		auto p = dynamic_cast<component_*>(this);
 		if (p)
 		{
 			auto owner = p->owner();
-			if (owner) 
+			if (owner)
 				return std::dynamic_pointer_cast<T>(owner);
 		}
 
-		return nullptr;	
-	}	
+		return nullptr;
+	}
 
 public:
 	virtual void _tick(double dt)	{}
